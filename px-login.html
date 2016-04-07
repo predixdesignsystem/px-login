@@ -95,16 +95,17 @@ Element providing a login/logout button that integrates nicely with Cloud Foundr
                     var xmlhttp = new XMLHttpRequest();
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState == 4) {
-                            if (xmlhttp.status == 200) {
-                                try {
-                                    resolve(JSON.parse(xmlhttp.responseText));
-                                }
-                                catch (e) {
-                                    reject(e);
-                                }
-                            }
-                            else {
-                                reject();
+                            try {
+                              var responseObj = JSON.parse(xmlhttp.responseText);
+                              if (xmlhttp.status == 200) {
+                                  resolve(responseObj);
+                              }
+                              else {
+                                  reject(responseObj);
+                              }
+
+                            } catch (parseError) {
+                              reject(parseError);
                             }
                         }
                     }
