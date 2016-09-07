@@ -664,7 +664,7 @@ button.btn {
   width: 55px; }
 
 .login {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   padding: 0 1rem 1rem; }
   .login > div {
