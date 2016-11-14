@@ -21,26 +21,28 @@ common/abstract rules go in px-login-sketch.scss, not in this file.
 
 @import 'px-login-sketch.scss';
 
-:host {
-  color: $white;
-  background-color: var(--px-app-nav-background-color);
-}
-
 .login {
   background-color: inherit;
   > div {
-    border-top-color: $gray8;
+    border-top-color: var(--px-login-border-color, $gray5);
+  }
+  ul li {
+    color: var(--px-login-text-color, $black);
+    &:hover {
+      color: var(--px-login-text-color--hover, $white);
+      background-color: var(--px-login-background-color--hover, $select-blue-hover);
+    }
   }
 }
 
 .dropdown-menu {
-  border-color: $gray5;
-  background-color: $gray1;
+  border-color: var(--px-login-border-color, $gray5);
+  background-color: var(--px-login-background-color, $gray1);
   li a {
-    color: $gray9;
+    color: var(--px-login-text-color, $black);
     &:hover {
-      color: $white;
-      background-color: $primary-blue;
+      color: var(--px-login-text-color--hover, $white);
+      background-color: var(--px-login-background-color--hover, $select-blue-hover);
     }
   }
 }
