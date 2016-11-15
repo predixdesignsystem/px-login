@@ -1,3 +1,8 @@
+
+v0.5.3
+==================
+* bower updating px-demo-snippet
+
 v0.5.2
 =================
 * added style variables for theming
