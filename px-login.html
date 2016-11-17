@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
 
 <!--
 Element providing a login/logout button that integrates nicely with Cloud Foundry's UAA.
@@ -42,19 +43,19 @@ Custom property | Description | Default
   </script>
   <template>
     <style include="px-login-styles"></style>
-    
+
     <div id="logincontainer" class="login">
       <template is="dom-if" if="{{!userInfo.user_name}}">
         <button class="btn btn--bare" on-click="loginHandler">
-          <i class="fa fa-user text--center u-mr--"></i>
+          <iron-icon icon="fa:fa-user" class="iron-icon text--center u-mr--"></iron-icon>
           <span>Sign In</span>
         </button>
       </template>
       <template is="dom-if" if="{{userInfo.user_name}}">
         <button class="btn btn--bare">
-          <i class="fa fa-user text--center"></i>
+          <iron-icon icon="fa:fa-user" class="iron-icon text--center u-mr--"></iron-icon>
           <span class="u-mh--">{{userInfo.user_name}}</span>
-          <i class="fa fa-angle-up"></i>
+          <iron-icon icon="fa:fa-angle-up" class="iron-icon"></iron-icon>
         </button>
         <ul class="dropdown-menu list-bare">
           <template is="dom-repeat" items="{{menuItems}}">

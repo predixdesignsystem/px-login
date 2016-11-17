@@ -72,12 +72,11 @@ $inuit-enable-btn--bare       : true;
   position: absolute;
 }
 
-.fa {
-  width: calculateRem(23px);
-}
-
-span + .fa {
-  width: auto;
+.iron-icon {
+  width: $inuit-base-font-size;
+  height: $inuit-base-font-size;
+  margin-bottom: calculateRem(2px);
+  margin-left: calculateRem(4px);
 }
 
 .dropdown-menu {

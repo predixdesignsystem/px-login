@@ -1,12 +1,14 @@
+v0.5.6
+==================
+* cutover to px-polymer-font-awesome
+
 v0.5.5
 ==================
 * removing px-theme style call
 
-
 v0.5.4
 ==================
 * changing Gruntfile.js to gulpfile.js
-
 
 v0.5.3
 ==================
