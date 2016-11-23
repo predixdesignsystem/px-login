@@ -1,6 +1,6 @@
 {
     "name": "px-login",
-    "version": "0.5.6",
+    "version": "0.5.7",
     "main": [
         "px-login.html"
     ],
@@ -19,7 +19,7 @@
     ],
     "dependencies": {
         "polymer": "^v1.6.0",
-        "px-theme": "~v1.1.2",
+        "px-theme": "^2.0.1",
         "es6-promise": "~3.2.2",
         "px-polymer-font-awesome": "^0.1.8"
     },
