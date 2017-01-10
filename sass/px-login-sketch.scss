@@ -46,9 +46,10 @@ $inuit-enable-btn--bare       : true;
   position: absolute;
   bottom: 0;
   left: 0;
-  &:hover .dropdown-menu {
-    opacity: 1;
-  }
+}
+
+:host(:hover) .dropdown-menu {
+  opacity: 1;
 }
 
 .login--collapsed{
