@@ -1,3 +1,7 @@
+v0.6.4
+==================
+* Update colors design to pick up new colors
+
 v0.6.3
 ==================
 * updated dependencies
