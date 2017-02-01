@@ -1,3 +1,7 @@
+v0.6.6
+==================
+* added favicon.ico 
+
 v0.6.5
 ==================
 * Updating so px-demo-snippet and px-api-viewer get new grays
