@@ -1,0 +1,112 @@
+<!-- Common imports -->
+<link rel="import" href="../../polymer/polymer.html" />
+<link rel="import" href="../../px-polymer-font-awesome/px-polymer-font-awesome.html" />
+
+<!-- Common demo imports -->
+<link rel="import" href="../../px-demo/px-demo-header.html" />
+<link rel="import" href="../../px-demo/px-demo-api-viewer.html" />
+<link rel="import" href="../../px-demo/px-demo-footer.html" />
+<link rel="import" href="../../px-demo/px-demo-configs.html" />
+<link rel="import" href="../../px-demo/px-demo-props.html" />
+<link rel="import" href="../../px-demo/px-demo-interactive.html" />
+<link rel="import" href="../../px-demo/px-demo-code-editor.html" />
+<link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
+
+<!-- Imports for this componnent -->
+<link rel="import" href="../../px-demo/css/px-demo-styles.html" />
+<link rel="import" href="../px-login.html" />
+
+<!-- Demo DOM module -->
+<dom-module id="local-element-demo">
+  <template>
+    <style include="px-demo-styles" is="custom-style"></style>
+
+    <!-- Header -->
+    <px-demo-header
+        module-name="px-login"
+        description="Designed to be used with px-app-nav, the px-login element provides a login/logout button that integrates nicely with Cloud Foundry's UAA.">
+    </px-demo-header>
+
+    <!-- Interactive -->
+    <px-demo-interactive>
+      <!-- Configs -->
+      <px-demo-configs configs="[[configs]]" props="{{props}}" chosen-config="{{chosenConfig}}"></px-demo-configs>
+
+      <!-- Props -->
+      <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
+
+      <!-- Code Editor -->
+      <px-demo-code-editor props="{{props}}"></px-demo-code-editor>
+
+      <!-- Component ---------------------------------------------------------->
+      <px-demo-component>
+        <div>
+          <p>The px-login component uses fixed positioning to always appear in the bottom left corner of the viewport. You should see an example of the px-login component in the corner of your screen.</p>
+          <px-login
+            menu-items='[{"icon": "fa-gear", "url":"/user-settings.html", "label": "Setting Item 1"}, {"icon": "fa-gear", "label": "Setting Item 2", "url":"/user-settings.html"}]'
+            logout-url="logged_out.html"
+            user-info-url="userInfo.js">
+          </px-login>
+        </div>
+      </px-demo-component>
+      <!-- END Component ------------------------------------------------------>
+
+      <px-demo-component-snippet
+          element-properties="{{props}}"
+          element-name="px-login">
+      </px-demo-component-snippet>
+    </px-demo-interactive>
+
+    <!-- API Viewer -->
+    <px-demo-api-viewer source="px-login"></px-demo-api-viewer>
+
+    <!-- Footer -->
+    <px-demo-footer></px-demo-footer>
+
+  </template>
+
+</dom-module>
+<script>
+  Polymer({
+    is: 'local-element-demo',
+
+    properties: {
+
+      props: {
+        type: Object,
+        value: function(){ return this.demoProps; }
+      },
+
+      configs: {
+        type: Array,
+        value: function(){
+          return [
+            { configName: "Default",
+              configReset: true }
+          ]
+        }
+      }
+    },
+
+    demoProps: {
+      menuItems: {
+        type: Array,
+        defaultValue: [{"icon": "fa-gear", "url":"/user-settings.html", "label": "Setting Item 1"}, {"icon": "fa-gear", "label": "Setting Item 2", "url":"/user-settings.html"}],
+        inputType: "code:JSON"
+      },
+
+      logoutUrl: {
+        type: String,
+        defaultValue: 'logged_out.html',
+        inputType: "text"
+      },
+
+      userInfoUrl: {
+        type: String,
+        defaultValue: 'userInfo.js',
+        inputType: "text"
+      }
+    }
+
+  });
+</script>

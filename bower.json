@@ -1,42 +1,35 @@
 {
-    "name": "px-login",
-    "version": "0.6.6",
-    "main": [
-        "px-login.html"
-    ],
-    "ignore": [
-        ".*",
-        "npm-debug.log",
-        "gulpfile.js",
-        "sass",
-        "bower_components",
-        "node_modules",
-        "test",
-        "OSS_Notice.pdf",
-        "scripts",
-        ".github",
-        "px-login.png"
-    ],
-    "dependencies": {
-        "polymer": "^v1.6.0",
-        "px-theme": "^2.0.1",
-        "es6-promise": "^3.2.2",
-        "px-polymer-font-awesome": "^1.1.0"
-    },
-    "devDependencies": {
-        "px-list-bare-design": "^0.3.0",
-        "px-starter-kit-design": "^0.7.0",
-        "px-forms-design": "^1.1.0",
-        "px-tables-design": "^1.1.0",
-        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
-        "px-tabs": "^0.6.0",
-        "px-api-viewer": "^0.1.0",
-        "px-demo-snippet": "^0.6.9",
-        "px-toggle-design": "^1.1.0",
-        "px-headings-design": "^0.3.0",
-        "px-actionable-text-icons-design": "^1.1.0",
-        "px-code-design": "^1.1.0",
-        "px-list-inline-design": "^0.3.0",
-        "px-buttons-design": "^1.1.0"
-    }
+  "name": "px-login",
+  "version": "0.6.7",
+  "main": [
+    "px-login.html"
+  ],
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "node_modules",
+    "sass",
+    "*.md",
+    "scripts",
+    ".github",
+    "gulpfile.js",
+    "wct.conf.json",
+    ".github",
+    "test",
+    "OSS_Notice.pdf",
+    "*.png",
+    "npm-debug.log"
+  ],
+  "dependencies": {
+    "polymer": "^v1.6.0",
+    "px-theme": "^2.0.1",
+    "es6-promise": "^3.2.2",
+    "px-polymer-font-awesome": "^1.1.0"
+  },
+  "devDependencies": {
+    "px-starter-kit-design": "^0.7.0",
+    "px-toggle-design": "^1.1.0",
+    "px-code-design": "^1.1.0",
+    "px-demo": "^1.4.8"
+  }
 }

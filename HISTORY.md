@@ -1,6 +1,10 @@
+v0.6.7
+==================
+* updated to px-demo
+
 v0.6.6
 ==================
-* added favicon.ico 
+* added favicon.ico
 
 v0.6.5
 ==================
