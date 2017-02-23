@@ -1,3 +1,7 @@
+v0.6.8
+==================
+* fixed relative paths in demo
+
 v0.6.7
 ==================
 * updated to px-demo
