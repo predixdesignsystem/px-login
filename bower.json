@@ -1,35 +1,40 @@
 {
   "name": "px-login",
-  "version": "0.6.8",
+  "version": "0.0.1",
   "main": [
     "px-login.html"
   ],
   "ignore": [
-    "**/.*",
+    ".*",
+    "npm-debug.log",
+    "gulpfile.js",
+    "sass",
     "bower_components",
     "node_modules",
-    "sass",
-    "*.md",
-    "scripts",
-    ".github",
-    "gulpfile.js",
-    "wct.conf.json",
-    ".github",
     "test",
     "OSS_Notice.pdf",
-    "*.png",
-    "npm-debug.log"
+    "scripts",
+    ".github",
+    "px-login.png",
+    "LICENSE.md",
+    "CONTRIBUTING.md",
+    "HISTORY.md",
+    "README.md",
+    ".jshintrc",
+    ".editorconfig"
   ],
   "dependencies": {
-    "polymer": "^v1.6.0",
-    "px-theme": "^2.0.1",
-    "es6-promise": "^3.2.2",
-    "px-polymer-font-awesome": "^1.1.0"
+    "polymer": "^1.7.1",
+    "px-theme": "^2.0.3",
+    "px-polymer-font-awesome": "^1.1.5",
+    "px-buttons-design": "^1.1.6",
+    "iron-ajax": "^1.4.3",
+    "px-spacing-design": "^0.4.4",
+    "px-dropdown": "^2.2.10",
+    "px-popover": "^1.7.5"
   },
   "devDependencies": {
-    "px-starter-kit-design": "^0.7.0",
-    "px-toggle-design": "^1.1.0",
-    "px-code-design": "^1.1.0",
-    "px-demo": "^1.4.8"
+    "px-starter-kit-design": "^0.7.3",
+    "px-demo": "^1.3.2"
   }
 }

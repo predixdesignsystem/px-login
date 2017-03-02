@@ -35,7 +35,7 @@ function buildCSS(){
   return combiner.obj([
     $.sass(sassOptions),
     $.autoprefixer({
-      browsers: ['last 2 versions'],
+      browsers: ['last 2 versions', 'Safari 8.0'],
       cascade: false
     }),
     gulpif(!argv.debug, $.cssmin())
@@ -43,13 +43,8 @@ function buildCSS(){
 }
 
 gulp.task('sass', function() {
-  return gulp.src(['./sass/*.scss', '!./sass/*sketch.scss'])
+  return gulp.src(['./sass/*.scss'])
     .pipe(buildCSS())
-    .pipe(gulpif(/.*predix/,
-      $.rename(function(path){
-        path.basename = new RegExp('.+?(?=\-predix)').exec(path.basename)[0];
-      })
-    ))
     .pipe(stylemod({
       moduleId: function(file) {
         return path.basename(file.path, path.extname(file.path)) + '-styles';

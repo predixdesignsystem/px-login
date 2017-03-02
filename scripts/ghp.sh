@@ -46,11 +46,9 @@ rm *.html
 rm *.json
 rm *.enc
 rm *.js
-rm *.png
 rm *.lock
 rm *.ico
 rm *.md
-rm *.pdf
 yes | rm .travis.yml
 rm .bowerrc
 rm .editorconfig
@@ -92,7 +90,7 @@ bower install
 # ------------------------------------------------------------------------------
 
 # Go into the component folder we've just installed from bower
-# cd ${REPO_NAME}
+#cd ${REPO_NAME}
 
 # ------------------------------------------------------------------------------
 # SW-PRECACHE
@@ -106,7 +104,7 @@ bower install
 # ------------------------------------------------------------------------------
 
 # Remember to exit out of the component before we do any git stuff
-# cd ../
+#cd ../
 
 # Do the git stuff
 

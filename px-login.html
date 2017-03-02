@@ -1,5 +1,13 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
+    'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
+-->
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
+
+<link rel="import" href="css/px-login-styles.html">
+<link rel="import" href="../px-popover/px-popover.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
 
 <!--
 Element providing a login/logout button that integrates nicely with Cloud Foundry's UAA.
@@ -7,21 +15,11 @@ Element providing a login/logout button that integrates nicely with Cloud Foundr
 ##### Usage
 
     <px-login
-        menu-items='[{"label": "Setting Item 1", "url":"/user-settings1"}]'
+        login-url="/login"
         logout-url="logged_out.html"
-        user-info-url="userInfo.js">
+        user-info-url="userInfo.js"
+        fetch-user-info-on-load>
     </px-login>
-
-### Styling
-The following custom properties are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--px-login-border-color` | Border color for the login | `$gray5`
-`--px-login-text-color` | Text color for the menu items | `$black`
-`--px-login-text-color--hover` | Text color for a menu item when its hovered over | `$white`
-`--px-login-background-color` | Background color for the menu items | `$gray1`
-`--px-login-background-color--hover` | Background color for a menu item when its hovered over | `$select-blue-hover`
 
 @element px-login
 @blurb Element providing a login/logout button.
@@ -29,211 +27,155 @@ Custom property | Description | Default
 @demo demo.html
 -->
 
-<link rel="import" href="css/px-login-styles.html">
-
 <dom-module id="px-login">
-  <script>
-    // Conditional loading of es6-promise polyfill
-    if(typeof ES6Promise === "undefined"){
-      var script = document.createElement('script');
-      script.async = true;
-      script.src = '../es6-promise/es6-promise.min.js';
-      document.head.appendChild(script);
-    }
-  </script>
   <template>
     <style include="px-login-styles"></style>
-
-    <div id="logincontainer" class="login">
-      <template is="dom-if" if="{{!userInfo.user_name}}">
-        <button class="btn btn--bare" on-click="loginHandler">
-          <iron-icon icon="fa:fa-user" class="iron-icon text--center u-mr--"></iron-icon>
-          <span>Sign In</span>
+    <iron-ajax id="userInfoAjax" url="{{userInfoUrl}}" handle-as="json" method="GET"></iron-ajax>
+    <div>
+        <button  style="width:180px" class="btn btn--bare" id="loginButton" hidden$="{{!_showLogin}}">
+          <i class="fa fa-user text--center u-mr--"></i> Sign In
         </button>
-      </template>
-      <template is="dom-if" if="{{userInfo.user_name}}">
-        <button class="btn btn--bare">
-          <iron-icon icon="fa:fa-user" class="iron-icon text--center u-mr--"></iron-icon>
-          <span class="u-mh--">{{userInfo.user_name}}</span>
-          <iron-icon icon="fa:fa-angle-up" class="iron-icon"></iron-icon>
+      <div hidden$="{{_showLogin}}">
+        <px-popover id="userPopover" orientation="bottom" enhanced="true" for="userNameButton" hide-overlay="true">
+          <button id="logoutButton" class="btn btn--bare" style="width: 120px"><i class="fa fa-sign-out text--center u-mr--"></i> Sign Out</button>
+        </px-popover>
+        <button id="userNameButton" name="userNameButton" class="btn btn--bare px-login-button px-login-user-button">
+          <i class="fa fa-user text--center u-mr--"></i>
+          <span class="u-mh--">{{userName}}</span>
+          <i class="fa fa-angle-down u-ml--"></i>
         </button>
-        <ul class="dropdown-menu list-bare">
-          <template is="dom-repeat" items="{{menuItems}}">
-            <li on-click="menuItemHandler" url$="{{item.url}}"><a>{{item.label}}</a></li>
-          </template>
-          <li on-click="logoutHandler"><a>Sign Out</a></li>
-        </ul>
-      </template>
+      </div>
     </div>
   </template>
 </dom-module>
 
 <script>
-    (function () {
-        window.px = window.px || {};
-        px.auth = px.auth || {
-            _loginUrl: null,
-            set loginUrl(val) {
-                this._loginUrl = val;
-            },
-            _logoutUrl: null,
-            set logoutUrl(val) {
-                this._logoutUrl = val;
-            },
-            _userInfoUrl: null,
-            set userInfoUrl(val) {
-                this._userInfoUrl = val;
-            },
-            login: function (clientPath) {
-                if (!this._loginUrl) {
-                    throw 'login url is not set';
-                }
-                if (!clientPath) {
-                  window.location.replace(this._loginUrl + '?state=' + location.href);
-                } else {
-                  //this causes an error, what should it do?
-                  window.location.replace(this._loginUrl + '?state='+ clientPath.url);
-                }
-            },
-            logout: function () {
-                if (!this._logoutUrl) {
-                    throw 'login url is not set';
-                }
-                window.location.replace(this._logoutUrl);
-            },
-            getUserInfo: function () {
-                var self = this;
-                if (!this._userInfoUrl) {
-                    throw 'userInfo url is not set';
-                }
+  Polymer({
 
-                return new Promise(function (resolve, reject) {
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState === 4) {
-                            if (xmlhttp.status === 200) {
-                                try {
-                                    resolve(JSON.parse(xmlhttp.responseText));
-                                }
-                                catch (e) {
-                                    reject(e);
-                                }
-                            }
-                            else {
-                                reject();
-                            }
-                        }
-                    };
-                    xmlhttp.open("GET", self._userInfoUrl, true);
-                    xmlhttp.send();
-                });
-            },
-            isAuthenticated: function () {
-                return this.getUserInfo();
-            }
-        };
-      })();
+    is: 'px-login', 
 
-        Polymer({
-            is: 'px-login',
-            properties: {
-                loginUrl: {
-                    type: String,
-                    value: '/login'
-                },
-                userInfoUrl: {
-                    type: String,
-                    value: '/userinfo'
-                },
-                logoutUrl: {
-                    type: String,
-                    value: '/logout'
-                },
-                defaultClientRoute: {
-                    type: String,
-                    value: '/about'
-                },
-                userInfo: {
-                  type: Object,
-                  value: function(){
-                    return {};
-                  }
-                },
-                /**
-                 * This menu items will display above sign out after login
-                 * e.g. user setting, user preference menu item
-                 *
-                 * menu items format
-                 * [{"url":"/user-settings", "label": "User Settings"}]
-                 */
-                menuItems: {
-                    type: Array,
-                    value: function() {
-                        return [{}];
-                    }
-                }
-            },
-            ready: function () {
-                var self = this;
-                window.px.auth.loginUrl = this.loginUrl;
-                window.px.auth.logoutUrl = this.logoutUrl;
-                window.px.auth.userInfoUrl = this.userInfoUrl;
-                window.px.auth.getUserInfo().then(function (data) {
-                  self.userInfo = data;
-                });
+    properties: {
+      /**
+      * URL for user login
+      *
+      * @property loginUrl
+      * @default '/login'
+      */
+      loginUrl: {
+          type: String,
+          value: '/login'
+      },
+      /**
+      * URL for fetching user info
+      *
+      * @property userInfoUrl
+      * @default '/userinfo'
+      */
+      userInfoUrl: {
+          type: String,
+          value: '/userinfo',
+          observer: '_fetchUserInfo'
+      },
+      /**
+      * URL for user logout
+      *
+      * @property 
+      * @default '/logout'
+      */
+      logoutUrl: {
+          type: String,
+          value: '/logout'
+      },
+      /**
+      * username to display
+      *
+      * @property userName
+      */
+      userName: {
+        type: String
+      },
 
-                document.body.addEventListener('nav-height-changed', this._onNavHeightChanged.bind(this));
-                document.body.addEventListener('nav-collapsing', this._onNavCollapsing.bind(this));
-                document.body.addEventListener('nav-expanded', this._onNavExpanded.bind(this));
+      /**
+      * userInfo retrieved from UAA
+      *
+      * @property userInfo
+      */
+      userInfo: {
+        type: Object
+      },
 
-                window.onscroll = scroll;
+      /**
+       * Set to true to make a REST call for user info
+       * 
+       * @property fetchUserInfoOnLoad
+       * @default true
+       */
+      fetchUserInfoOnLoad: {
+        type: Boolean,
+        value: true
+      },
 
-                function scroll() {
-                  if (window.pageYOffset + window.innerHeight >= document.body.scrollHeight - 60) {
-                    self.toggleClass('sticky', true);
-                  } else {
-                    self.toggleClass('sticky', false);
-                  }
-                }
-            },
-            _onNavExpanded: function(){
-              this.toggleClass('login--collapsed', false, this.$.logincontainer);
-            },
-            _onNavCollapsing: function(){
-              this.toggleClass('login--collapsed', true, this.$.logincontainer);
-            },
-            _onNavHeightChanged: function() {
-              if (window.innerHeight > document.body.clientHeight - 60) {
-                this.toggleClass('sticky', true);
-              } else {
-                this.toggleClass('sticky', false);
-              }
-            },
-            loginHandler: function (event, detail, sender) {
-                event.preventDefault();
-                event.stopPropagation();
+      _showLogin: {
+        type: Boolean,
+        value: true,
+        computed: '_computeShowLogin(userName)'
+      }
+    },
 
-                this.login();
-            },
-            logoutHandler: function (event, detail, sender) {
-                event.preventDefault();
-                event.stopPropagation();
+    /**
+    * Handles click on the "Sign in" button.
+    *
+    * @method loginClicked
+    */
+    loginClicked: function(event, detail, sender) {
+      window.location = Polymer.dom(this).getOwnerRoot().host.loginUrl;
+    },
 
-                this.logout();
-            },
-            menuItemHandler: function(event){
-                event.preventDefault();
-                event.stopPropagation();
-                var targetUrl = event.currentTarget.getAttribute('url');
-                if (targetUrl){
-                    window.location = targetUrl;
-                }
-            },
-            login: function(){
-                window.px.auth.login();
-            },
-            logout: function(){
-                window.px.auth.logout();
-            }
-        });
+    /**
+    * Handles click on the "Sign out" button.
+    *
+    * @method logoutClicked
+    */
+    logoutClicked: function(event, detail, sender) {
+      var pxLogin = Polymer.dom(this).getOwnerRoot().host;
+      pxLogin.userName = null;
+      pxLogin.userInfo = null;
+      window.location = pxLogin.logoutUrl
+    },
+
+    // _userNameClicked: function(event, detail, sender) {
+      // $$('#userPopover').show();
+      // this.$.userPopover.show();
+      // Polymer.dom(this).getOwnerRoot().host.$$.userPopover.show();
+      // console.dir('event', event);
+    // },
+
+    _computeShowLogin: function(userName) {
+      return !userName || userName.length < 1;
+    },
+
+    _fetchUserInfo: function(url) {
+      this.$.userInfoAjax.url = url;
+      if (url && this.fetchUserInfoOnLoad) {
+        this.$.userInfoAjax.generateRequest();
+      }
+    },
+
+    ready: function() {
+      var self = this;
+      this.$.loginButton.addEventListener('click', this.loginClicked);
+      this.$.logoutButton.addEventListener('click', this.logoutClicked);
+      this.$.userNameButton.addEventListener('click', function() {
+        // TODO: figure out how to remove this setTimeout:
+        setTimeout(function() {  
+          self.$.userPopover.show();
+        }, 10);
+      });
+      this._fetchUserInfo(this.userInfoUrl);
+      this.$.userInfoAjax.addEventListener('response', function(event) {
+        self.userName = event.detail.response.user_name;
+        self.userInfo = event.detail.response;
+      });
+    }
+  });
 </script>
