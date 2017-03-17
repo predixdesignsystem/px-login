@@ -11,7 +11,7 @@
 //
 // Sass for the for the px-login component
 //
-// @author
+// @author gstroup
 //
 
 
@@ -36,6 +36,8 @@
 $inuit-enable-btn--icon : true;
 $inuit-enable-btn--bare : true;
 @import "px-buttons-design/_objects.buttons.scss";
+@import "px-list-bare-design/_objects.list-bare.scss";
+@import "px-actionable-text-icons-design/_objects.actionable.scss";
 
 .btn {
     font-size: 1rem;
@@ -50,6 +52,13 @@ $inuit-enable-btn--bare : true;
     overflow: hidden; 
     text-overflow: ellipsis; 
     white-space: nowrap;
+}
+
+ul a {
+    color: var(--px-login-color, $gray5);
+    text-decoration: none;
+    line-height: 2;
+    cursor: pointer;
 }
 // Component
 

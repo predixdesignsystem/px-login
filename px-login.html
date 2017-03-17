@@ -11,14 +11,20 @@
 
 <!--
 Element providing a login/logout button that integrates nicely with Cloud Foundry's UAA.
+Supports custom menu items for other routes in your application, for instance a "Settings" page.
+By default, the component will call UAA for user info on load, but this can be disabled with the fetch-user-info-on-load property.
 
 ##### Usage
 
-    <px-login
-        login-url="/login"
-        logout-url="logged_out.html"
-        user-info-url="userInfo.js"
-        fetch-user-info-on-load>
+    <px-login 
+      login-url="/login" 
+      logout-url="/logout" 
+      user-info-url="/userinfo" 
+      fetch-user-info-on-load="true" 
+      sign-in-label="Sign In" 
+      sign-out-label="Sign Out" 
+      popover-location="bottom" 
+      menu-items='[{"url":"#settings","label":"Settings"},{"url":"#account","label":"My Account"}]'>
     </px-login>
 
 @element px-login
@@ -33,11 +39,16 @@ Element providing a login/logout button that integrates nicely with Cloud Foundr
     <iron-ajax id="userInfoAjax" url="{{userInfoUrl}}" handle-as="json" method="GET"></iron-ajax>
     <div>
         <button  style="width:180px" class="btn btn--bare" id="loginButton" hidden$="{{!_showLogin}}">
-          <i class="fa fa-user text--center u-mr--"></i> Sign In
+          <i class="fa fa-user text--center u-mr--"></i> {{signInLabel}}
         </button>
       <div hidden$="{{_showLogin}}">
-        <px-popover id="userPopover" orientation="bottom" enhanced="true" for="userNameButton" hide-overlay="true">
-          <button id="logoutButton" class="btn btn--bare" style="width: 120px"><i class="fa fa-sign-out text--center u-mr--"></i> Sign Out</button>
+        <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
+          <ul class="list-bare">
+            <template is="dom-repeat" items="{{menuItems}}">
+              <li class="u-ml- u-mr-"><a class="actionable actionable--action" href$="{{item.url}}">{{item.label}}</a></li>
+            </template>
+            <li class="u-ml- u-mr-" id="logoutButton"><a href="#" class="actionable actionable--action">{{signOutLabel}}</a></li>
+          </ul>
         </px-popover>
         <button id="userNameButton" name="userNameButton" class="btn btn--bare px-login-button px-login-user-button">
           <i class="fa fa-user text--center u-mr--"></i>
@@ -115,6 +126,50 @@ Element providing a login/logout button that integrates nicely with Cloud Foundr
         value: true
       },
 
+      /**
+       * Label to display when user is not signed in
+       * 
+       * @property signInLabel
+       * @default 'Sign In'
+       */
+      signInLabel: {
+        type: String,
+        value: 'Sign In'
+      },
+
+      /**
+       * Label to display when user is signed in
+       * 
+       * @property signOutLabel
+       * @default 'Sign Out'
+       */
+      signOutLabel: {
+        type: String,
+        value: 'Sign Out'
+      },
+
+      /**
+       * Where to position the popover: bottom, top, left, right
+       * 
+       * @property popoverLocation
+       * @default 'bottom'
+       */
+      popoverLocation: {
+        type: String,
+        value: 'bottom'
+      },
+
+      /**
+       * An array of objects to specify custom menu items.
+       * Each object should look like this:
+       *   {url: "/foo", label: "Foo Bar"}
+       * 
+       * @property menuItems
+       */
+      menuItems: {
+        type: Array
+      },
+
       _showLogin: {
         type: Boolean,
         value: true,
@@ -137,18 +192,12 @@ Element providing a login/logout button that integrates nicely with Cloud Foundr
     * @method logoutClicked
     */
     logoutClicked: function(event, detail, sender) {
+      event.preventDefault();
       var pxLogin = Polymer.dom(this).getOwnerRoot().host;
       pxLogin.userName = null;
       pxLogin.userInfo = null;
       window.location = pxLogin.logoutUrl
     },
-
-    // _userNameClicked: function(event, detail, sender) {
-      // $$('#userPopover').show();
-      // this.$.userPopover.show();
-      // Polymer.dom(this).getOwnerRoot().host.$$.userPopover.show();
-      // console.dir('event', event);
-    // },
 
     _computeShowLogin: function(userName) {
       return !userName || userName.length < 1;
@@ -166,7 +215,7 @@ Element providing a login/logout button that integrates nicely with Cloud Foundr
       this.$.loginButton.addEventListener('click', this.loginClicked);
       this.$.logoutButton.addEventListener('click', this.logoutClicked);
       this.$.userNameButton.addEventListener('click', function() {
-        // TODO: figure out how to remove this setTimeout:
+        // Need to wait a few ticks, to see if popover is available or not.
         setTimeout(function() {  
           self.$.userPopover.show();
         }, 10);

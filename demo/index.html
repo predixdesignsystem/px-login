@@ -10,6 +10,7 @@
 <link rel="import" href="../../px-demo/px-demo-props.html" />
 <link rel="import" href="../../px-demo/px-demo-interactive.html" />
 <link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
+<link rel="import" href="../../px-demo/px-demo-code-editor.html" />
 
 <!-- Imports for this componnent -->
 <link rel="import" href="../../px-demo/css/px-demo-styles.html" />
@@ -23,7 +24,7 @@
     <!-- Header -->
     <px-demo-header
         module-name="px-login"
-        description="The px-login element provides a simple login/logout button and displays username.  Integrates nicely with Predix UAA.">">
+        description="The px-login element provides a login/logout button that integrates nicely with Cloud Foundry's UAA.  (Note that Sign In does not work in this demo page.  You can set the User name property to simulate sign in here.)">
     </px-demo-header>
 
     <!-- Interactive -->
@@ -33,6 +34,9 @@
 
       <!-- Props -->
       <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
+
+      <!-- Code Editor -->
+      <px-demo-code-editor props="{{props}}"></px-demo-code-editor>
 
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
@@ -46,7 +50,11 @@
           login-url="{{props.loginUrl.value}}" 
           logout-url="{{props.logoutUrl.value}}"
           user-info-url="{{props.userInfoUrl.value}}"
-          fetch-user-info-on-load>
+          sign-in-label="{{props.signInLabel.value}}"
+          sign-out-label="{{props.signOutLabel.value}}"
+          popover-location="{{props.popoverLocation.value}}"
+          menu-items="{{props.menuItems.value}}"
+          fetch-user-info-on-load="{{props.fetchUserInfoOnLoad.value}}">
         </px-login>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -231,6 +239,27 @@
         type: Boolean,
         defaultValue: true,
         inputType: 'toggle'
+      },
+      signInLabel: {
+        type: String,
+        defaultValue: 'Sign In',
+        inputType: 'text'
+      },
+      signOutLabel: {
+        type: String,
+        defaultValue: 'Sign Out',
+        inputType: 'text'
+      },
+      popoverLocation: {
+        type: String,
+        defaultValue: 'bottom',
+        inputType: 'dropdown',
+        inputChoices: ['top', 'bottom', 'left', 'right']
+      },
+      menuItems: {
+        type: Array,
+        defaultValue: [{url: "#settings", label: "Settings"}, {url: "#account", label: "My Account"}],
+        inputType: "code:JSON"
       }
     }
   });
