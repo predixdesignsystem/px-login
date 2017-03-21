@@ -39,7 +39,7 @@ By default, the component will call UAA for user info on load, but this can be d
     <iron-ajax id="userInfoAjax" url="{{userInfoUrl}}" handle-as="json" method="GET"></iron-ajax>
     <div>
         <button  style="width:180px" class="btn btn--bare" id="loginButton" hidden$="{{!_showLogin}}">
-          <i class="fa fa-user text--center u-mr--"></i> {{localize('Sign In')}}
+          <i class="fa fa-user text--center u-mr--"></i> {{_signInLabel}}
         </button>
       <div hidden$="{{_showLogin}}">
         <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
@@ -47,7 +47,7 @@ By default, the component will call UAA for user info on load, but this can be d
             <template is="dom-repeat" items="{{menuItems}}">
               <li class="u-ml- u-mr-"><a class="actionable actionable--action" href$="{{item.url}}">{{item.label}}</a></li>
             </template>
-            <li class="u-ml- u-mr-" id="logoutButton"><a href="#" class="actionable actionable--action">{{localize('Sign Out')}}</a></li>
+            <li class="u-ml- u-mr-" id="logoutButton"><a href="#" class="actionable actionable--action">{{_signOutLabel}}</a></li>
           </ul>
         </px-popover>
         <button id="userNameButton" name="userNameButton" class="btn btn--bare px-login-button px-login-user-button">
@@ -164,6 +164,28 @@ By default, the component will call UAA for user info on load, but this can be d
         type: Array
       },
 
+      /**
+       * Label to display when user is not signed in
+       *
+       * @property signInLabel
+       * @default 'Sign In'
+       */
+      _signInLabel: {
+        type: String,
+        computed: 'localize("Sign In")'
+      },
+
+      /**
+       * Label to display when user is signed in
+       *
+       * @property signOutLabel
+       * @default 'Sign Out'
+       */
+      _signOutLabel: {
+        type: String,
+        computed: 'localize("Sign Out")'
+      },
+
       _showLogin: {
         type: Boolean,
         value: true,
@@ -204,11 +226,8 @@ By default, the component will call UAA for user info on load, but this can be d
       }
     },
 
-    attached: function() {
-      this.loadResources(this.resolveUrl('locales.json'));
-    },
-
     ready: function() {
+      this.loadResources(this.resolveUrl('locales.json'));
       var self = this;
       this.$.loginButton.addEventListener('click', this.loginClicked);
       this.$.logoutButton.addEventListener('click', this.logoutClicked);

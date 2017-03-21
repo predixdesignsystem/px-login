@@ -1,3 +1,7 @@
+v1.0.1
+==================
+* attempt to fix failing i18n tests
+
 v1.0.0
 ==================
 * merge PR #20 with Greg's redesign
