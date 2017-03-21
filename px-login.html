@@ -5,9 +5,10 @@
 -->
 <link rel="import" href="../polymer/polymer.html"/>
 
-<link rel="import" href="css/px-login-styles.html">
-<link rel="import" href="../px-popover/px-popover.html">
-<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="css/px-login-styles.html"/>
+<link rel="import" href="../px-popover/px-popover.html"/>
+<link rel="import" href="../iron-ajax/iron-ajax.html"/>
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 
 <!--
 Element providing a login/logout button that integrates nicely with Cloud Foundry's UAA.
@@ -16,15 +17,14 @@ By default, the component will call UAA for user info on load, but this can be d
 
 ##### Usage
 
-    <px-login 
-      login-url="/login" 
-      logout-url="/logout" 
-      user-info-url="/userinfo" 
-      fetch-user-info-on-load="true" 
-      sign-in-label="Sign In" 
-      sign-out-label="Sign Out" 
-      popover-location="bottom" 
-      menu-items='[{"url":"#settings","label":"Settings"},{"url":"#account","label":"My Account"}]'>
+    <px-login
+      login-url="/login"
+      logout-url="/logout"
+      user-info-url="/userinfo"
+      fetch-user-info-on-load="true"
+      popover-location="bottom"
+      menu-items='[{"url":"#settings","label":"Settings"},{"url":"#account","label":"My Account"}]'
+      language="en">
     </px-login>
 
 @element px-login
@@ -39,7 +39,7 @@ By default, the component will call UAA for user info on load, but this can be d
     <iron-ajax id="userInfoAjax" url="{{userInfoUrl}}" handle-as="json" method="GET"></iron-ajax>
     <div>
         <button  style="width:180px" class="btn btn--bare" id="loginButton" hidden$="{{!_showLogin}}">
-          <i class="fa fa-user text--center u-mr--"></i> {{signInLabel}}
+          <i class="fa fa-user text--center u-mr--"></i> {{localize('Sign In')}}
         </button>
       <div hidden$="{{_showLogin}}">
         <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
@@ -47,7 +47,7 @@ By default, the component will call UAA for user info on load, but this can be d
             <template is="dom-repeat" items="{{menuItems}}">
               <li class="u-ml- u-mr-"><a class="actionable actionable--action" href$="{{item.url}}">{{item.label}}</a></li>
             </template>
-            <li class="u-ml- u-mr-" id="logoutButton"><a href="#" class="actionable actionable--action">{{signOutLabel}}</a></li>
+            <li class="u-ml- u-mr-" id="logoutButton"><a href="#" class="actionable actionable--action">{{localize('Sign Out')}}</a></li>
           </ul>
         </px-popover>
         <button id="userNameButton" name="userNameButton" class="btn btn--bare px-login-button px-login-user-button">
@@ -63,7 +63,11 @@ By default, the component will call UAA for user info on load, but this can be d
 <script>
   Polymer({
 
-    is: 'px-login', 
+    is: 'px-login',
+
+    behaviors: [
+      Polymer.AppLocalizeBehavior
+    ],
 
     properties: {
       /**
@@ -90,7 +94,7 @@ By default, the component will call UAA for user info on load, but this can be d
       /**
       * URL for user logout
       *
-      * @property 
+      * @property
       * @default '/logout'
       */
       logoutUrl: {
@@ -117,7 +121,7 @@ By default, the component will call UAA for user info on load, but this can be d
 
       /**
        * Set to true to make a REST call for user info
-       * 
+       *
        * @property fetchUserInfoOnLoad
        * @default true
        */
@@ -127,30 +131,8 @@ By default, the component will call UAA for user info on load, but this can be d
       },
 
       /**
-       * Label to display when user is not signed in
-       * 
-       * @property signInLabel
-       * @default 'Sign In'
-       */
-      signInLabel: {
-        type: String,
-        value: 'Sign In'
-      },
-
-      /**
-       * Label to display when user is signed in
-       * 
-       * @property signOutLabel
-       * @default 'Sign Out'
-       */
-      signOutLabel: {
-        type: String,
-        value: 'Sign Out'
-      },
-
-      /**
        * Where to position the popover: bottom, top, left, right
-       * 
+       *
        * @property popoverLocation
        * @default 'bottom'
        */
@@ -160,10 +142,22 @@ By default, the component will call UAA for user info on load, but this can be d
       },
 
       /**
+       * A valid IETF language tag as a string that `app-localize-behavior` will
+       * use to localize this component. Refer to locales.json for currently supported languages.
+       *
+       * See https://github.com/PolymerElements/app-localize-behavior for API
+       * documentation and more information.
+       */
+      language: {
+        type: String,
+        value: 'en'
+      },
+
+      /**
        * An array of objects to specify custom menu items.
        * Each object should look like this:
        *   {url: "/foo", label: "Foo Bar"}
-       * 
+       *
        * @property menuItems
        */
       menuItems: {
@@ -210,13 +204,17 @@ By default, the component will call UAA for user info on load, but this can be d
       }
     },
 
+    attached: function() {
+      this.loadResources(this.resolveUrl('locales.json'));
+    },
+
     ready: function() {
       var self = this;
       this.$.loginButton.addEventListener('click', this.loginClicked);
       this.$.logoutButton.addEventListener('click', this.logoutClicked);
       this.$.userNameButton.addEventListener('click', function() {
         // Need to wait a few ticks, to see if popover is available or not.
-        setTimeout(function() {  
+        setTimeout(function() {
           self.$.userPopover.show();
         }, 10);
       });

@@ -32,7 +32,8 @@
     "px-spacing-design": "^0.4.4",
     "px-dropdown": "^2.2.10",
     "px-popover": "^1.7.5",
-    "px-actionable-text-icons-design": "^1.1.8"
+    "px-actionable-text-icons-design": "^1.1.8",
+    "app-localize-behavior": "^0.10.1"
   },
   "devDependencies": {
     "px-starter-kit-design": "^0.7.3",
