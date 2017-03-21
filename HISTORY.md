@@ -1,3 +1,8 @@
+v1.0.0
+==================
+* merge PR #20 with Greg's redesign
+* add app-localize-behavior for i18n
+
 v0.6.8
 ==================
 * fixed relative paths in demo
