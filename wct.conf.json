@@ -37,6 +37,7 @@
     }
   },
   "suites": [
-    "test/fixture.html"
+    "test/px-login-test-fixture.html"
   ]
+
 }

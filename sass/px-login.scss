@@ -1,0 +1,73 @@
+/*
+ * Copyright (c) 2014 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+
+//
+// Sass for the for the px-login component
+//
+// @author gstroup
+//
+
+
+
+// Settings
+@import "px-colors-design/_settings.colors.scss";
+
+// Tools
+
+// Generic
+@import "px-normalize-design/_generic.normalize.scss";
+@import "px-box-sizing-design/_generic.box-sizing.scss";
+@import "px-helpers-design/_generic.helpers.scss";
+
+// Base
+@import "px-flexbox-design/_base.flexbox.scss";
+@import "px-viewport-design/_base.viewport.scss";
+
+// Meta
+
+// Objects
+$inuit-enable-btn--icon : true;
+$inuit-enable-btn--bare : true;
+@import "px-buttons-design/_objects.buttons.scss";
+@import "px-list-bare-design/_objects.list-bare.scss";
+@import "px-actionable-text-icons-design/_objects.actionable.scss";
+
+.btn {
+    font-size: 1rem;
+}
+
+.px-login-button {
+    color: var(--px-login-color, $gray5);
+}
+
+.px-login-user-button {
+    width: 180px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+}
+
+ul a {
+    color: var(--px-login-color, $gray5);
+    text-decoration: none;
+    line-height: 2;
+    cursor: pointer;
+}
+// Component
+
+// Trumps
+@import "inuit-clearfix/_trumps.clearfix.scss";
+$inuit-enable-margins : true;
+$inuit-enable-margins--tiny : true;
+$inuit-enable-margins--small : true;
+$inuit-enable-margins--large : true;
+$inuit-enable-margins--huge : true;
+@import "px-spacing-responsive-design/_trumps.spacing-responsive.scss";
+@import "px-widths-responsive-design/_trumps.widths-responsive.scss";
