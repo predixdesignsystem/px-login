@@ -26,8 +26,10 @@ var runCustomTests = function() {
     test('Sign in button shows by default', function(done) {
       var loginEl = Polymer.dom(document).querySelector('px-login'),
           loginButton = Polymer.dom(loginEl.root).querySelector('#loginButton');
-      assert.include(loginButton.textContent, 'Sign In');
-      done();
+      setTimeout(function() {
+        assert.include(loginButton.textContent, 'Sign In');
+        done();
+      }, 500);
     });
 
     test('Username shows when set', function(done) {
@@ -77,7 +79,7 @@ var runCustomTests = function() {
         assert.equal(loginEl.userName, JSON.parse(fakeUserInfo).user_name);
         assert.deepEqual(loginEl.userInfo, JSON.parse(fakeUserInfo));
         done();
-      });      
+      });
     });
 
     test('Clicking logout clears properties, and changes window.location to logoutUrl', function(done) {
@@ -104,7 +106,7 @@ var runCustomTests = function() {
         // assert.equal(loginButton.hidden, true);
         done();
       });
-    });  
+    });
 
     test('Custom menu items are displayed in popover', function() {
       var loginEl = Polymer.dom(document).querySelector('px-login'),
@@ -122,7 +124,7 @@ var runCustomTests = function() {
         expect(listItems[0].textContent).to.equal("test label");
         done();
       });
-    });  
+    });
 
   });
 }
