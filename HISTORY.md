@@ -1,3 +1,7 @@
+v1.0.2
+==================
+* bump dependencies
+
 v1.0.1
 ==================
 * attempt to fix failing i18n tests
