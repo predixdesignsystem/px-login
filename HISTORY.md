@@ -1,3 +1,7 @@
+v1.0.3
+==================
+* cut over to PxLocalizeBehavior
+
 v1.0.2
 ==================
 * bump dependencies
