@@ -33,7 +33,8 @@
     "px-dropdown": "^3.1.0",
     "px-popover": "^1.7.5",
     "px-actionable-text-icons-design": "^1.1.8",
-    "px-localize-behavior": "^0.0.2"
+    "px-localize-behavior": "^0.0.2",
+    "iron-icon": "^1.0.12"
   },
   "devDependencies": {
     "px-starter-kit-design": "^0.7.3",
