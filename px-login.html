@@ -8,7 +8,7 @@
 <link rel="import" href="css/px-login-styles.html"/>
 <link rel="import" href="../px-popover/px-popover.html"/>
 <link rel="import" href="../iron-ajax/iron-ajax.html"/>
-<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
+<link rel="import" href="../px-localize-behavior/px-localize-behavior.html"/>
 
 <!--
 Element providing a login/logout button that integrates nicely with Cloud Foundry's UAA.
@@ -66,7 +66,7 @@ By default, the component will call UAA for user info on load, but this can be d
     is: 'px-login',
 
     behaviors: [
-      Polymer.AppLocalizeBehavior
+      PxLocalizeBehavior
     ],
 
     properties: {
@@ -151,37 +151,6 @@ By default, the component will call UAA for user info on load, but this can be d
       language: {
         type: String,
         value: 'en'
-      },
-
-      /**
-       * Localized strings for this component.
-       */
-      resources: {
-        type: Object,
-        value: function() {
-          return {
-            // German
-            "de": {
-              "Sign In": "Einloggen",
-              "Sign Out": "Ausloggen"
-            },
-            // English
-            "en": {
-              "Sign In": "Sign In",
-              "Sign Out": "Sign Out"
-            },
-            // Spanish
-            "es": {
-              "Sign In": "Iniciar Sesión",
-              "Sign Out": "Cerrar Sesión"
-            },
-            // French
-            "fr": {
-              "Sign In": "Connecter",
-              "Sign Out": "Déconnecter"
-            }
-          };
-        }
       },
 
       /**

@@ -1,3 +1,7 @@
+v1.0.5
+==================
+* re-add PxLocalizeBehavior
+
 v1.0.4
 ==================
 * revert PxLocalizeBehavior
