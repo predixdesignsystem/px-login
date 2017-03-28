@@ -1,3 +1,7 @@
+v1.0.6
+==================
+* temporarily remove Safari 9 testing
+
 v1.0.5
 ==================
 * re-add PxLocalizeBehavior
