@@ -1,3 +1,7 @@
+v1.0.7
+==================
+* cutover to px-polymer-font-awesome
+
 v1.0.6
 ==================
 * temporarily remove Safari 9 testing

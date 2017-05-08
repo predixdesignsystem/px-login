@@ -9,6 +9,7 @@
 <link rel="import" href="../px-popover/px-popover.html"/>
 <link rel="import" href="../iron-ajax/iron-ajax.html"/>
 <link rel="import" href="../px-localize-behavior/px-localize-behavior.html"/>
+<link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html"/>
 
 <!--
 Element providing a login/logout button that integrates nicely with Cloud Foundry's UAA.
@@ -39,7 +40,7 @@ By default, the component will call UAA for user info on load, but this can be d
     <iron-ajax id="userInfoAjax" url="{{userInfoUrl}}" handle-as="json" method="GET"></iron-ajax>
     <div>
         <button  style="width:180px" class="btn btn--bare" id="loginButton" hidden$="{{!_showLogin}}">
-          <i class="fa fa-user text--center u-mr--"></i> {{_signInLabel}}
+          <iron-icon icon="fa:fa-user" class="text--center u-mr--"></iron-icon> {{_signInLabel}}
         </button>
       <div hidden$="{{_showLogin}}">
         <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
@@ -51,9 +52,9 @@ By default, the component will call UAA for user info on load, but this can be d
           </ul>
         </px-popover>
         <button id="userNameButton" name="userNameButton" class="btn btn--bare px-login-button px-login-user-button">
-          <i class="fa fa-user text--center u-mr--"></i>
+          <iron-icon icon="fa:fa-user" class="text--center u-mr--"></iron-icon>
           <span class="u-mh--">{{userName}}</span>
-          <i class="fa fa-angle-down u-ml--"></i>
+          <iron-icon icon="fa:fa-angle-down" class="u-ml--"></i>
         </button>
       </div>
     </div>

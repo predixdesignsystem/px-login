@@ -48,10 +48,15 @@ $inuit-enable-btn--bare : true;
 }
 
 .px-login-user-button {
-    width: 180px; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+iron-icon {
+  width: 1rem;
+  height: 1rem;
 }
 
 ul a {
