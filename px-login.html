@@ -39,7 +39,7 @@ By default, the component will call UAA for user info on load, but this can be d
     <style include="px-login-styles"></style>
     <iron-ajax id="userInfoAjax" url="{{userInfoUrl}}" handle-as="json" method="GET"></iron-ajax>
     <div>
-        <button  style="width:180px" class="btn btn--bare" id="loginButton" hidden$="{{!_showLogin}}">
+        <button  style="width:180px" class="btn btn--bare px-login-button" id="loginButton" hidden$="{{!_showLogin}}">
           <iron-icon icon="fa:fa-user" class="text--center u-mr--"></iron-icon> {{_signInLabel}}
         </button>
       <div hidden$="{{_showLogin}}">

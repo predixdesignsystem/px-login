@@ -1,3 +1,7 @@
+v1.0.8
+==================
+* fix styles
+
 v1.0.7
 ==================
 * cutover to px-polymer-font-awesome
