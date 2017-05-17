@@ -8,7 +8,7 @@
 <link rel="import" href="css/px-login-styles.html"/>
 <link rel="import" href="../px-popover/px-popover.html"/>
 <link rel="import" href="../iron-ajax/iron-ajax.html"/>
-<link rel="import" href="../px-localize-behavior/px-localize-behavior.html"/>
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 <link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html"/>
 
 <!--
@@ -40,7 +40,7 @@ By default, the component will call UAA for user info on load, but this can be d
     <iron-ajax id="userInfoAjax" url="{{userInfoUrl}}" handle-as="json" method="GET"></iron-ajax>
     <div>
         <button  style="width:180px" class="btn btn--bare px-login-button" id="loginButton" hidden$="{{!_showLogin}}">
-          <iron-icon icon="fa:fa-user" class="text--center u-mr--"></iron-icon> {{_signInLabel}}
+          <iron-icon icon="fa:fa-user" class="text--center u-mr--"></iron-icon> [[localize("Sign In")]]
         </button>
       <div hidden$="{{_showLogin}}">
         <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
@@ -48,7 +48,7 @@ By default, the component will call UAA for user info on load, but this can be d
             <template is="dom-repeat" items="{{menuItems}}">
               <li class="u-ml- u-mr-"><a class="actionable actionable--action" href$="{{item.url}}">{{item.label}}</a></li>
             </template>
-            <li class="u-ml- u-mr-" id="logoutButton"><a href="#" class="actionable actionable--action">{{_signOutLabel}}</a></li>
+            <li class="u-ml- u-mr-" id="logoutButton"><a href="#" class="actionable actionable--action">[[localize("Sign Out")]]</a></li>
           </ul>
         </px-popover>
         <button id="userNameButton" name="userNameButton" class="btn btn--bare px-login-button px-login-user-button">
@@ -67,7 +67,7 @@ By default, the component will call UAA for user info on load, but this can be d
     is: 'px-login',
 
     behaviors: [
-      PxLocalizeBehavior
+      Polymer.AppLocalizeBehavior
     ],
 
     properties: {
@@ -153,7 +153,25 @@ By default, the component will call UAA for user info on load, but this can be d
         type: String,
         value: 'en'
       },
-
+      /**
+      * Use the key for localization if value for  language is missing. Should
+      * always be true for  our components
+      */
+      useKeyIfMissing: {
+        type: Boolean,
+        value: true
+      },
+      resources: {
+        type: Object,
+        value: function() {
+          return {
+            'en': {
+              "Sign In": "Sign In",
+              "Sign Out": "Sign Out"
+            }
+          }
+        }
+      },
       /**
        * An array of objects to specify custom menu items.
        * Each object should look like this:
@@ -163,28 +181,6 @@ By default, the component will call UAA for user info on load, but this can be d
        */
       menuItems: {
         type: Array
-      },
-
-      /**
-       * Label to display when user is not signed in
-       *
-       * @property signInLabel
-       * @default 'Sign In'
-       */
-      _signInLabel: {
-        type: String,
-        computed: 'localize("Sign In")'
-      },
-
-      /**
-       * Label to display when user is signed in
-       *
-       * @property signOutLabel
-       * @default 'Sign Out'
-       */
-      _signOutLabel: {
-        type: String,
-        computed: 'localize("Sign Out")'
       },
 
       _showLogin: {

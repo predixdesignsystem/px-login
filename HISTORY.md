@@ -1,3 +1,7 @@
+v2.0.0
+==================
+* use app-localize-behavior for localization
+
 v1.0.8
 ==================
 * fix styles

@@ -47,8 +47,7 @@
           user-info-url="{{props.userInfoUrl.value}}"
           popover-location="{{props.popoverLocation.value}}"
           menu-items="{{props.menuItems.value}}"
-          fetch-user-info-on-load="{{props.fetchUserInfoOnLoad.value}}"
-          language="{{props.language.value}}">
+          fetch-user-info-on-load="{{props.fetchUserInfoOnLoad.value}}">
         </px-login>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -125,12 +124,6 @@
         type: Boolean,
         defaultValue: true,
         inputType: 'toggle'
-      },
-      language: {
-        type: String,
-        defaultValue: 'en',
-        inputType: 'dropdown',
-        inputChoices: ['de','en','es','fr']
       },
       popoverLocation: {
         type: String,
