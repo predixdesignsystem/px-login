@@ -1,4 +1,4 @@
-<!--
+px:user<!--
     Relative paths assume component is being run from inside an app or another component, where dependencies are flat
     siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
     'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
@@ -9,7 +9,7 @@
 <link rel="import" href="../px-popover/px-popover.html"/>
 <link rel="import" href="../iron-ajax/iron-ajax.html"/>
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
-<link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html"/>
+<link rel="import" href="../px-polymer-font-awesome/px-icon-set.html"/>
 
 <!--
 Element providing a login/logout button that integrates nicely with Cloud Foundry's UAA.
@@ -40,7 +40,7 @@ By default, the component will call UAA for user info on load, but this can be d
     <iron-ajax id="userInfoAjax" url="{{userInfoUrl}}" handle-as="json" method="GET"></iron-ajax>
     <div>
         <button  style="width:180px" class="btn btn--bare px-login-button" id="loginButton" hidden$="{{!_showLogin}}">
-          <iron-icon icon="fa:fa-user" class="text--center u-mr--"></iron-icon> [[localize("Sign In")]]
+          <iron-icon icon="px:user" class="text--center u-mr--"></iron-icon> [[localize("Sign In")]]
         </button>
       <div hidden$="{{_showLogin}}">
         <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
@@ -52,9 +52,9 @@ By default, the component will call UAA for user info on load, but this can be d
           </ul>
         </px-popover>
         <button id="userNameButton" name="userNameButton" class="btn btn--bare px-login-button px-login-user-button">
-          <iron-icon icon="fa:fa-user" class="text--center u-mr--"></iron-icon>
+          <iron-icon icon="px:user" class="text--center u-mr--"></iron-icon>
           <span class="u-mh--">{{userName}}</span>
-          <iron-icon icon="fa:fa-angle-down" class="u-ml--"></i>
+          <iron-icon icon="px:chevron-down" class="u-ml--"></iron-icon>
         </button>
       </div>
     </div>

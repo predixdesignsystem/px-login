@@ -44,7 +44,7 @@ $inuit-enable-btn--bare : true;
 }
 
 .px-login-button {
-    color: var(--px-login-color, $gray8);
+    color: var(--px-login-color, $gray13);
 }
 
 .px-login-user-button {
@@ -60,7 +60,7 @@ iron-icon {
 }
 
 ul a {
-    color: var(--px-login-color, $gray8);
+    color: var(--px-login-color, $gray13);
     text-decoration: none;
     line-height: 2;
     cursor: pointer;
