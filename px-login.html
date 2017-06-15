@@ -16,7 +16,7 @@ Element providing a login/logout button that integrates nicely with Cloud Foundr
 Supports custom menu items for other routes in your application, for instance a "Settings" page.
 By default, the component will call UAA for user info on load, but this can be disabled with the fetch-user-info-on-load property.
 
-##### Usage
+### Usage
 
     <px-login
       login-url="/login"
@@ -39,18 +39,21 @@ By default, the component will call UAA for user info on load, but this can be d
     <style include="px-login-styles"></style>
     <iron-ajax id="userInfoAjax" url="{{userInfoUrl}}" handle-as="json" method="GET"></iron-ajax>
     <div>
-        <button  style="width:180px" class="btn btn--bare px-login-button" id="loginButton" hidden$="{{!_showLogin}}">
+        <button style="width:180px" class="btn btn--bare px-login-button" id="loginButton" hidden$="{{!_showLogin}}">
           <iron-icon icon="px:user" class="text--center u-mr--"></iron-icon> [[localize("Sign In")]]
         </button>
       <div hidden$="{{_showLogin}}">
-        <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
+        <!-- <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
           <ul class="list-bare">
             <template is="dom-repeat" items="{{menuItems}}">
               <li class="u-ml- u-mr-"><a class="actionable actionable--action" href$="{{item.url}}">{{item.label}}</a></li>
             </template>
             <li class="u-ml- u-mr-" id="logoutButton"><a href="#" class="actionable actionable--action">[[localize("Sign Out")]]</a></li>
           </ul>
-        </px-popover>
+        </px-popover> -->
+
+        <px-dropdown id="dropdown" items="{{menuItems}}"></px-dropdown>
+
         <button id="userNameButton" name="userNameButton" class="btn btn--bare px-login-button px-login-user-button">
           <iron-icon icon="px:user" class="text--center u-mr--"></iron-icon>
           <span class="u-mh--">{{userName}}</span>
@@ -226,11 +229,12 @@ By default, the component will call UAA for user info on load, but this can be d
     ready: function() {
       var self = this;
       this.$.loginButton.addEventListener('click', this.loginClicked);
-      this.$.logoutButton.addEventListener('click', this.logoutClicked);
+      // this.$.logoutButton.addEventListener('click', this.logoutClicked);
       this.$.userNameButton.addEventListener('click', function() {
         // Need to wait a few ticks, to see if popover is available or not.
         setTimeout(function() {
-          self.$.userPopover.show();
+          // self.$.userPopover.show();
+          self.$.dropdown.toggle();
         }, 10);
       });
       this._fetchUserInfo(this.userInfoUrl);
