@@ -1,4 +1,4 @@
-px:user<!--
+<!--
     Relative paths assume component is being run from inside an app or another component, where dependencies are flat
     siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
     'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
@@ -39,25 +39,24 @@ By default, the component will call UAA for user info on load, but this can be d
     <style include="px-login-styles"></style>
     <iron-ajax id="userInfoAjax" url="{{userInfoUrl}}" handle-as="json" method="GET"></iron-ajax>
     <div>
-        <button style="width:180px" class="btn btn--bare px-login-button" id="loginButton" hidden$="{{!_showLogin}}">
-          <iron-icon icon="px:user" class="text--center u-mr--"></iron-icon> [[localize("Sign In")]]
+      <div hidden$="{{!_showLogin}}">
+        <button class="btn btn--bare login-button" id="loginButton" >
+          <iron-icon icon="px:user" class="login-user-icon text--center"></iron-icon> [[localize("Sign In")]]
         </button>
+      </div>
       <div hidden$="{{_showLogin}}">
-        <!-- <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
+        <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
           <ul class="list-bare">
             <template is="dom-repeat" items="{{menuItems}}">
-              <li class="u-ml- u-mr-"><a class="actionable actionable--action" href$="{{item.url}}">{{item.label}}</a></li>
+              <li class="u-ml- u-mr- login-menu--item"><a class="actionable actionable--action" href$="{{item.url}}">{{item.label}}</a></li>
             </template>
             <li class="u-ml- u-mr-" id="logoutButton"><a href="#" class="actionable actionable--action">[[localize("Sign Out")]]</a></li>
           </ul>
-        </px-popover> -->
-
-        <px-dropdown id="dropdown" items="{{menuItems}}"></px-dropdown>
-
-        <button id="userNameButton" name="userNameButton" class="btn btn--bare px-login-button px-login-user-button">
-          <iron-icon icon="px:user" class="text--center u-mr--"></iron-icon>
-          <span class="u-mh--">{{userName}}</span>
-          <iron-icon icon="px:chevron-down" class="u-ml--"></iron-icon>
+        </px-popover>
+        <button id="userNameButton" name="userNameButton" class="btn btn--bare login-button">
+          <iron-icon icon="px:user" class="login-user-icon text--center"></iron-icon>
+          <div class="truncate">{{userName}}</div>
+          <iron-icon icon="px:chevron-down" class="login-chevron-icon"></iron-icon>
         </button>
       </div>
     </div>
@@ -229,12 +228,11 @@ By default, the component will call UAA for user info on load, but this can be d
     ready: function() {
       var self = this;
       this.$.loginButton.addEventListener('click', this.loginClicked);
-      // this.$.logoutButton.addEventListener('click', this.logoutClicked);
+      this.$.logoutButton.addEventListener('click', this.logoutClicked);
       this.$.userNameButton.addEventListener('click', function() {
         // Need to wait a few ticks, to see if popover is available or not.
         setTimeout(function() {
-          // self.$.userPopover.show();
-          self.$.dropdown.toggle();
+          self.$.userPopover.show();
         }, 10);
       });
       this._fetchUserInfo(this.userInfoUrl);

@@ -1,6 +1,6 @@
 <!-- Common imports -->
 <link rel="import" href="../../polymer/polymer.html" />
-<link rel="import" href="../../px-polymer-font-awesome/px-polymer-font-awesome.html" />
+<link rel="import" href="../../px-polymer-font-awesome/px-icon-set.html" />
 
 <!-- Common demo imports -->
 <link rel="import" href="../../px-demo/px-demo-header.html" />
@@ -133,7 +133,7 @@
       },
       menuItems: {
         type: Array,
-        defaultValue: [{key: "#settings", val: "Settings"}, {key: "#account", val: "My Account"}],
+        defaultValue: [{url: "#settings", label: "Settings"}, {url: "#account", label: "My Account"}],
         inputType: "code:JSON"
       }
     }
