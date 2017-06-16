@@ -48,7 +48,7 @@ By default, the component will call UAA for user info on load, but this can be d
         <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
           <ul class="list-bare">
             <template is="dom-repeat" items="{{menuItems}}">
-              <li class="login-menu--item"><a class="actionable actionable--action" href$="{{item.url}}">{{item.label}}</a></li>
+              <li class="login-menu--item truncate"><a class="actionable actionable--action" href$="{{item.url}}" title="{{item.label}}">{{item.label}}</a></li>
             </template>
             <li id="logoutButton"><a href="#" class="actionable actionable--action">[[localize("Sign Out")]]</a></li>
           </ul>
