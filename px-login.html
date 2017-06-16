@@ -41,22 +41,22 @@ By default, the component will call UAA for user info on load, but this can be d
     <div>
       <div hidden$="{{!_showLogin}}">
         <button class="btn btn--bare login-button" id="loginButton" >
-          <iron-icon icon="px:user" class="login-user-icon text--center"></iron-icon> [[localize("Sign In")]]
+          <iron-icon icon="px:user" class="login-button--user-icon text--center"></iron-icon> [[localize("Sign In")]]
         </button>
       </div>
       <div hidden$="{{_showLogin}}">
         <px-popover id="userPopover" orientation="[[popoverLocation]]" enhanced="true" for="userNameButton" hide-overlay="true">
           <ul class="list-bare">
             <template is="dom-repeat" items="{{menuItems}}">
-              <li class="u-ml- u-mr- login-menu--item"><a class="actionable actionable--action" href$="{{item.url}}">{{item.label}}</a></li>
+              <li class="login-menu--item"><a class="actionable actionable--action" href$="{{item.url}}">{{item.label}}</a></li>
             </template>
-            <li class="u-ml- u-mr-" id="logoutButton"><a href="#" class="actionable actionable--action">[[localize("Sign Out")]]</a></li>
+            <li id="logoutButton"><a href="#" class="actionable actionable--action">[[localize("Sign Out")]]</a></li>
           </ul>
         </px-popover>
         <button id="userNameButton" name="userNameButton" class="btn btn--bare login-button">
-          <iron-icon icon="px:user" class="login-user-icon text--center"></iron-icon>
-          <div class="truncate">{{userName}}</div>
-          <iron-icon icon="px:chevron-down" class="login-chevron-icon"></iron-icon>
+          <iron-icon icon="px:user" class="login-button--user-icon text--center"></iron-icon>
+          <div class="truncate" title="{{userName}}">{{userName}}</div>
+          <iron-icon icon="px:chevron-down" class="login-button--chevron-icon"></iron-icon>
         </button>
       </div>
     </div>
