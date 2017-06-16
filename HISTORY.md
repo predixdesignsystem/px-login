@@ -1,6 +1,6 @@
 v2.0.0
 ==================
-* update dependencies, colors, and icons for design refresh
+* design refresh
 * use app-localize-behavior for localization
 
 v1.0.8
