@@ -39,6 +39,8 @@ $inuit-enable-btn--bare : true;
 @import "px-list-bare-design/_objects.list-bare.scss";
 @import "px-actionable-design/_objects.actionable.scss";
 
+// Component
+
 .login-button {
   width: 180px;
   display: flex;
@@ -54,8 +56,8 @@ $inuit-enable-btn--bare : true;
 }
 
 .login-button--chevron-icon {
-  width: 10px;
-  min-width: 10px;
+  width: 12px;
+  min-width: 12px;
   margin-left: 5px;
 }
 
@@ -68,8 +70,6 @@ $inuit-enable-btn--bare : true;
 .login-menu--item {
   height: 30px;
 }
-
-// Component
 
 // Trumps
 $inuit-enable-margins : true;
