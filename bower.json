@@ -34,11 +34,12 @@
     "app-localize-behavior": "^1.0.2"
   },
   "devDependencies": {
+    "px-normalize-design": "^1.0.0",
+    "px-box-sizing-design": "^1.0.0",
     "px-spacing-design": "^1.0.0",
     "px-buttons-design": "^2.0.0",
     "px-actionable-design": "^2.0.0",
     "px-list-bare-design": "^1.0.0",
-    "px-starter-kit-design": "^1.0.0",
     "px-helpers-design": "^1.0.0",
     "px-demo": "^2.0.0"
   }
