@@ -44,15 +44,15 @@ var runCustomTests = function() {
     test('Clicking username shows popover', function(done) {
       var loginEl = Polymer.dom(document).querySelector('px-login'),
           userNameButton,
-          popoverWrapper = document.querySelector('#popoverWrapper');
+          popover = document.querySelector('px-popover');
 
       loginEl.userName = 'Greg S';
       userNameButton = Polymer.dom(loginEl.root).querySelector('#userNameButton');
-      expect(popoverWrapper.classList.contains('fadeFromHidden')).to.equal(false);
+      expect(popover._isShowing).to.equal(false);
       userNameButton.click();
       flush(function() {
-        popoverWrapper = document.querySelector('#popoverWrapper');
-        expect(popoverWrapper.classList.contains('fadeFromHidden')).to.equal(true);
+        popover = document.querySelector('px-popover');
+        expect(popover._isShowing).to.equal(true);
         done();
       });
     });
@@ -85,15 +85,13 @@ var runCustomTests = function() {
     test('Clicking logout clears properties, and changes window.location to logoutUrl', function(done) {
       var loginEl = Polymer.dom(document).querySelector('px-login'),
           userNameButton,
-          logoutButton,
-          popoverWrapper = document.querySelector('#popoverWrapper');
+          logoutButton
 
       loginEl.userName = 'Greg S';
       loginEl.logoutUrl = '#logout';
       userNameButton = Polymer.dom(loginEl.root).querySelector('#userNameButton');
       userNameButton.click();
       flush(function() {
-        popoverWrapper = document.querySelector('#popoverWrapper');
         logoutButton = document.querySelector('#logoutButton');
         logoutButton.click();
       });
@@ -102,13 +100,11 @@ var runCustomTests = function() {
         assert.isNull(loginEl.userName);
         assert.isNull(loginEl.userInfo);
         assert.equal('#logout', window.location.hash);
-        // let loginButton = Polymer.dom(loginEl.root).querySelector('#loginButton');
-        // assert.equal(loginButton.hidden, true);
         done();
       });
     });
 
-    test('Custom menu items are displayed in popover', function() {
+    test('Custom menu items are displayed in popover', function(done) {
       var loginEl = Polymer.dom(document).querySelector('px-login'),
           userNameButton, popoverWrapper, listItems;
 
@@ -117,10 +113,8 @@ var runCustomTests = function() {
       userNameButton = Polymer.dom(loginEl.root).querySelector('#userNameButton');
       userNameButton.click();
       flush(function() {
-        popoverWrapper = document.querySelector('#popoverWrapper');
-        expect(popoverWrapper.classList.contains('fadeFromHidden')).to.equal(true);
-        listItems = document.querySelectorAll('#popover li');
-        expect(listItems.length).to.equal(2);
+        listItems = document.querySelectorAll('.login-menu--item');
+        expect(listItems.length).to.equal(1);
         expect(listItems[0].textContent).to.equal("test label");
         done();
       });
