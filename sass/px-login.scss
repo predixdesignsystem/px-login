@@ -16,7 +16,6 @@
 
 
 // Settings
-@import "px-colors-design/_settings.colors.scss";
 
 // Tools
 
@@ -30,7 +29,6 @@
 // Meta
 
 // Objects
-$inuit-enable-btn--icon : true;
 $inuit-enable-btn--bare : true;
 @import "px-buttons-design/_objects.buttons.scss";
 @import "px-list-bare-design/_objects.list-bare.scss";
@@ -44,7 +42,7 @@ $inuit-enable-btn--bare : true;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
-  color: var(--px-login-text-color, $gray5);
+  color: var(--px-login-text-color, black);
 }
 
 .login-button--user-icon {
@@ -64,9 +62,3 @@ $inuit-enable-btn--bare : true;
 }
 
 // Trumps
-$inuit-enable-margins : true;
-$inuit-enable-margins--tiny : true;
-$inuit-enable-margins--small : true;
-$inuit-enable-margins--large : true;
-$inuit-enable-margins--huge : true;
-@import "px-spacing-design/_trumps.spacing.scss";
