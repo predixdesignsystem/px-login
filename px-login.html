@@ -9,7 +9,8 @@
 <link rel="import" href="../px-popover/px-popover.html"/>
 <link rel="import" href="../iron-ajax/iron-ajax.html"/>
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
-<link rel="import" href="../px-polymer-font-awesome/px-icon-set.html"/>
+<link rel="import" href="../px-icon-set/px-icon-set.html"/>
+<link rel="import" href="../px-icon-set/px-icon.html"/>
 
 <!--
 Element providing a login/logout button that integrates nicely with Cloud Foundry's UAA.
@@ -49,7 +50,7 @@ Custom property | Description
     <div>
       <div hidden$="{{!_showLogin}}">
         <button class="btn btn--bare login-button" id="loginButton" >
-          <iron-icon icon="px:user" class="login-button--user-icon text--center"></iron-icon> [[localize("Sign In")]]
+          <px-icon icon="px:user" class="login-button--user-icon text--center"></px-icon> [[localize("Sign In")]]
         </button>
       </div>
       <div hidden$="{{_showLogin}}">
@@ -62,9 +63,9 @@ Custom property | Description
           </ul>
         </px-popover>
         <button id="userNameButton" name="userNameButton" class="btn btn--bare login-button">
-          <iron-icon icon="px:user" class="login-button--user-icon text--center"></iron-icon>
+          <px-icon icon="px:user" class="login-button--user-icon text--center"></px-icon>
           <div class="truncate" title="{{userName}}">{{userName}}</div>
-          <iron-icon icon="px:chevron-down" class="login-button--chevron-icon"></iron-icon>
+          <px-icon icon="px:chevron-down" class="login-button--chevron-icon"></px-icon>
         </button>
       </div>
     </div>
