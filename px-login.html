@@ -134,12 +134,10 @@ Custom property | Description
       /**
        * Set to true to make a REST call for user info
        *
-       * @property fetchUserInfoOnLoad
-       * @default true
        */
-      fetchUserInfoOnLoad: {
+      doNotFetchUserInfoOnLoad: {
         type: Boolean,
-        value: true
+        value: false
       },
 
       /**
@@ -229,7 +227,7 @@ Custom property | Description
 
     _fetchUserInfo: function(url) {
       this.$.userInfoAjax.url = url;
-      if (url && this.fetchUserInfoOnLoad) {
+      if (url && !this.doNotFetchUserInfoOnLoad) {
         this.$.userInfoAjax.generateRequest();
       }
     },

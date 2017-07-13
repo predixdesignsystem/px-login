@@ -2,6 +2,7 @@ v2.0.0
 ==================
 * design refresh
 * use app-localize-behavior for localization
+* changed fetchUserInfoOnLoad to doNotFetchUserInfoOnLoad and flipped logic so bool it not true by default.
 
 v1.0.8
 ==================
