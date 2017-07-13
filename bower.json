@@ -29,7 +29,7 @@
     "px-theme": "^3.0.0",
     "px-icon-set": "^2.0.0",
     "iron-ajax": "^2.0.0",
-    "promise-polyfill": "polymerlabs/promise-polyfill#^1.0.1",
+    "promise-polyfill": "polymerlabs/promise-polyfill#^2.0.0",
     "px-dropdown": "^4.0.0",
     "px-popover": "^2.0.0",
     "app-localize-behavior": "^2.0.0"
@@ -47,6 +47,6 @@
 
   "resolutions": {
     "webcomponentsjs": "^0.7.24",
-    "promise-polyfill": "^1.0.0"
+    "promise-polyfill": "^2.0.0"
   }
 }
