@@ -1,8 +1,10 @@
-#px-login
+# px-login [![Build Status](https://travis-ci.org/PredixDev/p
+x-login.svg?branch=master)](https://travis-ci.org/PredixDev/p
+x-login)
 
 ## Overview
 
-px-login is a Predix UI component
+Px-login is a Predix UI component that provides a login/logout button which integrates nicely with Cloud Foundry's UAA.
 
 ## Usage
 
