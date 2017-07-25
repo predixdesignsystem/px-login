@@ -2,7 +2,7 @@
 
 ## Overview
 
-Px-login is a Predix UI component that provides a login/logout button which integrates nicely with Cloud Foundry's UAA.
+`Px-login` is a Predix UI component which provides a login/logout button that integrates nicely with Cloud Foundry's UAA.
 
 ## Usage
 
@@ -12,17 +12,17 @@ Px-login is a Predix UI component that provides a login/logout button which inte
 3. bower
 4. [webcomponents-lite.js polyfill](https://github.com/webcomponents/webcomponentsjs)
 
-Node, npm and bower are necessary to install the component and dependencies. webcomponents.js adds support for web components and custom elements to your application.
+Node, npm, and bower are necessary to install the component and dependencies. webcomponents.js adds support for web components and custom elements to your application.
 
 ## Getting Started
 
-First, install the component via bower on the command line.
+First, install the component via bower on the command line:
 
 ```
 bower install px-login --save
 ```
 
-Second, import the component to your application with the following tag in your head.
+Second, import the component in your application with the following tag in your head:
 
 ```
 <link rel="import" href="/bower_components/px-login/px-login.html"/>
@@ -30,9 +30,15 @@ Second, import the component to your application with the following tag in your 
 
 Finally, use the component in your application:
 
-```
-Insert Your demo code here.
-```
+    <px-login
+      login-url="/login"
+      logout-url="/logout"
+      user-info-url="/userinfo"
+      fetch-user-info-on-load="true"
+      popover-location="bottom"
+      menu-items='[{"url":"#settings","label":"Settings"},{"url":"#account","label":"My Account"}]'
+      language="en">
+    </px-login>
 
 <br />
 <hr />
