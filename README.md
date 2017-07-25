@@ -1,6 +1,4 @@
-# px-login [![Build Status](https://travis-ci.org/PredixDev/p
-x-login.svg?branch=master)](https://travis-ci.org/PredixDev/p
-x-login)
+# px-login [![Build Status](https://travis-ci.org/PredixDev/px-login.svg?branch=master)](https://travis-ci.org/PredixDev/px-login)
 
 ## Overview
 
