@@ -1,3 +1,7 @@
+v2.0.2
+==================
+* revert self/this to fix unit test
+
 v2.0.1
 ==================
 * log error from iron-ajax

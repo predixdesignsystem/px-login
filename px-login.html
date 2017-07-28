@@ -234,18 +234,19 @@ Custom property | Description
     },
 
     ready: function() {
+      var self = this;
       this.$.loginButton.addEventListener('click', this.loginClicked);
       this.$.logoutButton.addEventListener('click', this.logoutClicked);
       this.$.userNameButton.addEventListener('click', function() {
         // Need to wait a few ticks, to see if popover is available or not.
         setTimeout(function() {
-          this.$.userPopover.show();
+          self.$.userPopover.show();
         }, 10);
-      }.bind(this));
+      });
       this.$.userInfoAjax.addEventListener('response', function(event) {
-        this.userName = event.detail.response.user_name;
-        this.userInfo = event.detail.response;
-      }.bind(this));
+        self.userName = event.detail.response.user_name;
+        self.userInfo = event.detail.response;
+      });
       this.$.userInfoAjax.addEventListener('error', function(event) {
         console.log(event.detail.error);
       });
