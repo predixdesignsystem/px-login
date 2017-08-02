@@ -1,3 +1,7 @@
+v2.0.3
+==================
+* fix text color and spacing on all browsers
+
 v2.0.2
 ==================
 * revert self/this to fix unit test
