@@ -1,3 +1,7 @@
+v2.0.4
+==================
+* switch width to max-width
+
 v2.0.3
 ==================
 * fix text color and spacing on all browsers

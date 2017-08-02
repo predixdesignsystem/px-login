@@ -37,7 +37,7 @@ $inuit-enable-btn--bare : true;
 // Component
 
 .login-button {
-  width: var(--px-login-button-width, 180px);
+  max-width: var(--px-login-button-width, 180px);
   display: flex;
   margin-left: auto;
   margin-right: auto;
