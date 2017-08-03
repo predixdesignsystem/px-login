@@ -1,3 +1,7 @@
+v2.0.5
+==================
+* fix incorrect url in demo
+
 v2.0.4
 ==================
 * switch width to max-width
