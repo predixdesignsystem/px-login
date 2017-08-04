@@ -1,3 +1,7 @@
+v2.0.6
+==================
+* runtime theming for demo
+
 v2.0.5
 ==================
 * fix incorrect url in demo
