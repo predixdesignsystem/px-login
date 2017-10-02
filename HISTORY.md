@@ -1,3 +1,7 @@
+v2.0.7
+==================
+* update demo, fix #30
+
 v2.0.6
 ==================
 * runtime theming for demo

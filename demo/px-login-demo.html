@@ -42,12 +42,10 @@
       <px-demo-component>
         <px-login
           user-name="{{props.userName.value}}"
-          login-url="{{props.loginUrl.value}}"
-          logout-url="{{props.logoutUrl.value}}"
-          user-info-url="{{props.userInfoUrl.value}}"
           popover-location="{{props.popoverLocation.value}}"
           menu-items="{{props.menuItems.value}}"
-          fetch-user-info-on-load="{{props.fetchUserInfoOnLoad.value}}">
+          login-url="#"
+          logout-url="#">
         </px-login>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -91,7 +89,7 @@
       hideLocalize: {
         type: Array,
         value: function() {
-          return ['localize','resources','useKeyIfMissing','formats','pathToResources','loadResources','app-localize-resources-error','app-localize-resources-loaded']
+          return ['localize','useKeyIfMissing','formats','pathToResources','loadResources','bubbleEvent','app-localize-resources-error','app-localize-resources-loaded']
         }
       }
     },
@@ -102,28 +100,8 @@
     demoProps: {
       userName: {
         type: String,
-        defaultValue: undefined,
+        defaultValue: 'Sample User',
         inputType: 'text'
-      },
-      loginUrl: {
-        type: String,
-        defaultValue: '#login',
-        inputType: 'text'
-      },
-      logoutUrl: {
-        type: String,
-        defaultValue: '#logout',
-        inputType: 'text'
-      },
-      userInfoUrl: {
-        type: String,
-        defaultValue: '/user-info-sample.json',
-        inputType: 'text'
-      },
-      fetchUserInfoOnLoad: {
-        type: Boolean,
-        defaultValue: true,
-        inputType: 'toggle'
       },
       popoverLocation: {
         type: String,
