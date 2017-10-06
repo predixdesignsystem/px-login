@@ -16,7 +16,8 @@
 <!--
 Element providing a login/logout button that integrates nicely with Cloud Foundry's UAA.
 Supports custom menu items for other routes in your application, for instance a "Settings" page.
-By default, the component will call UAA for user info on load, but this can be disabled with the fetch-user-info-on-load property.
+By default, the component will call UAA for user info on load, but this can be disabled with the
+do-not-fetch-user-info-on-load property.
 
 ### Usage
 
@@ -24,10 +25,9 @@ By default, the component will call UAA for user info on load, but this can be d
       login-url="/login"
       logout-url="/logout"
       user-info-url="/userinfo"
-      fetch-user-info-on-load="true"
+      do-not-fetch-user-info-on-load
       popover-location="bottom"
-      menu-items='[{"url":"#settings","label":"Settings"},{"url":"#account","label":"My Account"}]'
-      language="en">
+      menu-items='[{"url":"#settings","label":"Settings"},{"url":"#account","label":"My Account"}]'>
     </px-login>
 
 ### Styling

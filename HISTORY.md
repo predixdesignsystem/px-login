@@ -1,3 +1,7 @@
+v2.0.9
+==================
+* fix docs
+
 v2.0.8
 ==================
 * remove observer on userInfoUrl property
