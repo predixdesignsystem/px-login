@@ -3,7 +3,8 @@
   "plugins": {
     "local": {
       "browsers": [
-        "chrome"
+        "chrome",
+        "firefox"
       ]
     },
     "sauce": {
@@ -21,12 +22,13 @@
         },
         {
           "browserName": "safari",
-          "platform": "OS X 10.11",
+          "platform": "OS X 10.12",
           "version": "10"
         },
         {
-          "browserName": "firefox",
-          "platform": "OS X 10.11"
+          "browserName": "safari",
+          "platform": "OS X 10.12",
+          "version": "11"
         }
       ]
     }
@@ -34,5 +36,4 @@
   "suites": [
     "test/px-login-test-fixture.html"
   ]
-
 }
