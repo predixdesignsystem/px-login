@@ -19,7 +19,9 @@
 <!-- Demo DOM module -->
 <dom-module id="px-login-demo">
   <template>
-    <style include="px-demo-styles" is="custom-style"></style>
+    <custom-style>
+      <style include="px-demo-styles" is="custom-style"></style>
+    </custom-style>
 
     <!-- Header -->
     <px-demo-header
@@ -31,27 +33,29 @@
     <!-- Interactive -->
     <px-demo-interactive>
       <!-- Configs -->
-      <px-demo-configs configs="[[configs]]" props="{{props}}" chosen-config="{{chosenConfig}}"></px-demo-configs>
+      <px-demo-configs slot="px-demo-configs" configs="[[configs]]" props="{{props}}" chosen-config="{{chosenConfig}}"></px-demo-configs>
 
       <!-- Props -->
-      <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
+      <px-demo-props slot="px-demo-props" props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
 
       <!-- Code Editor -->
-      <px-demo-code-editor props="{{props}}"></px-demo-code-editor>
+      <px-demo-code-editor slot="px-demo-code-editor" props="{{props}}"></px-demo-code-editor>
 
       <!-- Component ---------------------------------------------------------->
-      <px-demo-component>
+      <px-demo-component slot="px-demo-component">
         <px-login
           user-name="{{props.userName.value}}"
           popover-location="{{props.popoverLocation.value}}"
           menu-items="{{props.menuItems.value}}"
           login-url="#"
-          logout-url="#">
+          logout-url="#"
+          user-info-url="../../user-info-sample.json">
         </px-login>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
 
       <px-demo-component-snippet
+          slot="px-demo-component-snippet"
           element-properties="{{props}}"
           element-name="px-login">
       </px-demo-component-snippet>
