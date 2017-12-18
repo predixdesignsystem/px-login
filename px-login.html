@@ -35,7 +35,10 @@ The following custom properties are available for styling:
 
 Custom property | Description
 :------------|:-------------
-`--px-login-button-width`   | Width of the login button including icons and text - inner text will be truncated if necessary to fit
+`--px-login-button-width`   | Width of the login button including icons and text
+`--px-login-custom-icon-height` | Use with the `custom-icon` slot
+`--px-login-custom-icon-width` | Use with the `custom-icon` slot
+`--px-login-custom-icon-radius` | Use with the `custom-icon` slot
 
 @element px-login
 @blurb Element providing a login/logout button.
@@ -63,7 +66,10 @@ Custom property | Description
           </ul>
         </px-popover>
         <button id="userNameButton" name="userNameButton" class="btn btn--bare login-button">
-          <px-icon icon="px-nav:generic-user" class="login-button--user-icon text--center"></px-icon>
+          <template is="dom-if" if="[[!hideUserIcon]]">
+            <px-icon icon="px-nav:generic-user" class="login-button--user-icon text--center"></px-icon>
+          </template>
+          <slot name="custom-icon"></slot>
           <div class="truncate" title="{{userName}}">{{userName}}</div>
           <px-icon icon="px-utl:chevron" class="login-button--chevron-icon"></px-icon>
         </button>
@@ -199,6 +205,21 @@ Custom property | Description
         type: Boolean,
         value: true,
         computed: '_computeShowLogin(userName)'
+      },
+      /**
+       * If true, the generic user icon will not appear. Your application can then pass a custom user avatar
+       * icon or photo into the `custom-icon` slot, e.g.
+       *
+       *     <px-login hide-user-icon>
+       *       <img slot="custom-icon" src="..." />
+       *     </px-login>
+       *
+       * By default, the image will be 2rem x 2rem with a 50% border radius (cropped into a circle).
+       * You can override these using the CSS variables above.
+       */
+      hideUserIcon: {
+        type: Boolean,
+        value: false
       }
     },
 

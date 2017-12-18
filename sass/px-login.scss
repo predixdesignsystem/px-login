@@ -39,6 +39,7 @@ $inuit-enable-btn--bare : true;
 .login-button {
   max-width: var(--px-login-button-width, 180px);
   display: flex;
+  align-items: center;
   margin-left: auto;
   margin-right: auto;
   line-height: 2rem;
@@ -54,11 +55,18 @@ $inuit-enable-btn--bare : true;
   --iron-icon-width: 1rem;
   --iron-icon-height: 1rem;
   margin-left: 0.3333rem;
-  margin-top: 0.4rem;
 }
 
 .login-menu--item {
   height: 2rem;
+}
+
+::slotted(*) {
+  height: var(--px-login-custom-icon-height, 2rem);
+  width: var(--px-login-custom-icon-width, 2rem);
+  border-radius: var(--px-login-custom-icon-radius, 50%);
+  margin-right: 0.3333rem;
+  overflow: hidden;
 }
 
 // Trumps

@@ -49,7 +49,9 @@
           menu-items="{{props.menuItems.value}}"
           login-url="#"
           logout-url="#"
-          user-info-url="../../user-info-sample.json">
+          user-info-url="../../user-info-sample.json"
+          hide-user-icon>
+          <img slot="custom-icon" src$="[[importPath]]Edison.png"/>
         </px-login>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>

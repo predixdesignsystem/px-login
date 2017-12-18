@@ -1,3 +1,7 @@
+v2.2.0
+==================
+* add custom icon functionality
+
 v2.1.0
 ==================
 * Polymer 1.x/2.x hybrid element support
