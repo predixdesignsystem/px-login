@@ -69,7 +69,9 @@ Custom property | Description
           <template is="dom-if" if="[[!hideUserIcon]]">
             <px-icon icon="px-nav:generic-user" class="login-button--user-icon text--center"></px-icon>
           </template>
-          <slot name="custom-icon"></slot>
+          <div class="custom-icon">
+            <slot name="custom-icon"></slot>
+          </div>
           <div class="truncate" title="{{userName}}">{{userName}}</div>
           <px-icon icon="px-utl:chevron" class="login-button--chevron-icon"></px-icon>
         </button>

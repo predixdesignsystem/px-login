@@ -1,3 +1,7 @@
+v2.2.1
+==================
+* fix in Polymer 1.x
+
 v2.2.0
 ==================
 * add custom icon functionality
