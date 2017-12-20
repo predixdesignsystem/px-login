@@ -50,8 +50,10 @@
           login-url="#"
           logout-url="#"
           user-info-url="../../user-info-sample.json"
-          hide-user-icon>
-          <img slot="custom-icon" src$="[[importPath]]Edison.png"/>
+          custom-user-icon="{{props.customUserIcon.value}}">
+          <template is="dom-if" if="{{props.customUserIcon.value}}">
+            <img slot="custom-icon" src$="[[importPath]]Edison.png"/>
+          </template>
         </px-login>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -120,6 +122,11 @@
         type: Array,
         defaultValue: [{url: "#settings", label: "Settings"}, {url: "#account", label: "My Account"}],
         inputType: "code:JSON"
+      },
+      customUserIcon: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
       }
     }
   });

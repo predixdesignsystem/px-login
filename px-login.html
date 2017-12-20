@@ -53,7 +53,8 @@ Custom property | Description
     <div>
       <div hidden$="{{!_showLogin}}">
         <button class="btn btn--bare login-button" id="loginButton" >
-          <px-icon icon="px-nav:generic-user" class="login-button--user-icon text--center"></px-icon> [[localize("Sign In")]]
+          <px-icon icon="px-nav:generic-user" class="login-button--user-icon text--center"></px-icon>
+          <template is="dom-if" if="[[!collapsed]]">[[localize("Sign In")]]</template>
         </button>
       </div>
       <div hidden$="{{_showLogin}}">
@@ -66,14 +67,18 @@ Custom property | Description
           </ul>
         </px-popover>
         <button id="userNameButton" name="userNameButton" class="btn btn--bare login-button">
-          <template is="dom-if" if="[[!hideUserIcon]]">
+          <template is="dom-if" if="[[!customUserIcon]]">
             <px-icon icon="px-nav:generic-user" class="login-button--user-icon text--center"></px-icon>
           </template>
-          <div class="custom-icon">
-            <slot name="custom-icon"></slot>
-          </div>
-          <div class="truncate" title="{{userName}}">{{userName}}</div>
-          <px-icon icon="px-utl:chevron" class="login-button--chevron-icon"></px-icon>
+          <template is="dom-if" if="[[customUserIcon]]">
+            <div class="custom-icon">
+              <slot name="custom-icon"></slot>
+            </div>
+          </template>
+          <template is="dom-if" if="[[!collapsed]]">
+            <div class="truncate" title="{{userName}}">{{userName}}</div>
+            <px-icon icon="px-utl:chevron" class="login-button--chevron-icon"></px-icon>
+          </template>
         </button>
       </div>
     </div>
@@ -212,14 +217,23 @@ Custom property | Description
        * If true, the generic user icon will not appear. Your application can then pass a custom user avatar
        * icon or photo into the `custom-icon` slot, e.g.
        *
-       *     <px-login hide-user-icon>
+       *     <px-login custom-user-icon>
        *       <img slot="custom-icon" src="..." />
        *     </px-login>
        *
        * By default, the image will be 2rem x 2rem with a 50% border radius (cropped into a circle).
        * You can override these using the CSS variables above.
        */
-      hideUserIcon: {
+      customUserIcon: {
+        type: Boolean,
+        value: false
+      },
+      /**
+      * When used with a vertical px-app-nav, the login component should have a "collapsed" state in which only
+      * the icon is visible and the user name or other text is hidden. Collapsed status is changed based on the
+      * collapsed state of the px-app-nav.
+      */
+      collapsed: {
         type: Boolean,
         value: false
       }

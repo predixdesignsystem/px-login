@@ -1,3 +1,7 @@
+v2.2.2
+==================
+* make property name clearer, fix non-custom icon display
+
 v2.2.1
 ==================
 * fix in Polymer 1.x
