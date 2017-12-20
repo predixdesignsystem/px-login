@@ -1,3 +1,7 @@
+v2.2.3
+==================
+* close popover on collapse
+
 v2.2.2
 ==================
 * make property name clearer, fix non-custom icon display
