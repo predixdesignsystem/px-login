@@ -1,3 +1,7 @@
+v2.2.4
+==================
+* fix unit test
+
 v2.2.3
 ==================
 * close popover on collapse

@@ -1,7 +1,7 @@
 suite('Custom Automation Tests for px-login', function() {
   let fakeUserInfo, server, loginEl;
 
-  setup(function() {
+  setup(function(done) {
     fakeUserInfo = '{"user_name": "FromServer"}';
     server = sinon.fakeServer.create();
     server.respondWith('GET', '/userinfo', [200, {"Content-Type": "application/json"}, fakeUserInfo]);
@@ -9,6 +9,9 @@ suite('Custom Automation Tests for px-login', function() {
     loginEl = fixture('px_login_1');
     loginEl.userName = null;
     loginEl.userInfo = null;
+    flush(()=>{
+      done();
+    });
   });
 
   teardown(function() {
@@ -18,7 +21,7 @@ suite('Custom Automation Tests for px-login', function() {
   test('Sign in button shows by default', function(done) {
     var loginButton = Polymer.dom(loginEl.root).querySelector('#loginButton');
     setTimeout(function() {
-      assert.include(loginButton.textContent, 'Sign In');
+      assert.include(loginButton.textContent.trim(), 'Sign In');
       done();
     }, 500);
   });
@@ -27,7 +30,7 @@ suite('Custom Automation Tests for px-login', function() {
     var userNameButton;
     loginEl.userName = 'Greg S';
     userNameButton = Polymer.dom(loginEl.root).querySelector('#userNameButton');
-    assert.include(userNameButton.textContent, 'Greg S');
+    assert.include(userNameButton.textContent.trim(), 'Greg S');
     done();
   });
 
