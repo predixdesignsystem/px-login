@@ -1,0 +1,24 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <title>px-login Demo</title>
+  <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../px-theme/px-theme-styles.html"></link>
+
+  <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+  <link rel="import" href="../px-login.html" />
+</head>
+
+<body>
+  <custom-style>
+    <style is="custom-style" include="px-theme-styles"></style>
+  </custom-style>
+  <px-login menu-items='[{"url":"/user-settings.html", "label": "Setting Item 1"}, {"label": "Setting Item 2", "url":"/user-settings.html"}]' logout-url="logged_out.html" user-info-url="../user-info-sample.json">
+  </px-login>
+
+</body>
+
+</html>
