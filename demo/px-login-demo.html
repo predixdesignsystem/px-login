@@ -44,11 +44,10 @@
       <!-- Component ---------------------------------------------------------->
       <px-demo-component slot="px-demo-component">
         <px-login
+          id="comp"
           user-name="{{props.userName.value}}"
           popover-location="{{props.popoverLocation.value}}"
           menu-items="{{props.menuItems.value}}"
-          login-url="#"
-          logout-url="#"
           user-info-url$="[[importPath]]../user-info-sample.json"
           custom-user-icon="{{props.customUserIcon.value}}">
           <template is="dom-if" if="{{props.customUserIcon.value}}">
@@ -113,7 +112,7 @@
       },
       menuItems: {
         type: Array,
-        defaultValue: [{url: "#settings", label: "Settings"}, {url: "#account", label: "My Account"}],
+        defaultValue: [{url: "", label: "Settings"}, {url: "", label: "My Account"}],
         inputType: "code:JSON"
       },
       customUserIcon: {
@@ -121,6 +120,11 @@
         defaultValue: false,
         inputType: 'toggle'
       }
+    },
+
+    attached: function() {
+      this.$.comp.$.loginButton.removeEventListener('click', this.$.comp.loginClicked);
+      this.$.comp.$.logoutButton.removeEventListener('click', this.$.comp.logoutClicked);
     }
   });
 </script>

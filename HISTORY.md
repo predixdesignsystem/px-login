@@ -2,6 +2,10 @@ v2.2.5
 ==================
 * fix relative path, move simple demo
 
+v2.2.6
+==================
+* p[revent demo from redirecting
+
 v2.2.4
 ==================
 * fix unit test
