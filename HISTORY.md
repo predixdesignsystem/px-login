@@ -1,10 +1,14 @@
-v2.2.5
+v2.2.7
 ==================
-* fix relative path, move simple demo
+* allow custom field for user display name (#25)
 
 v2.2.6
 ==================
-* p[revent demo from redirecting
+* prevent demo from redirecting
+
+v2.2.5
+==================
+* fix relative path, move simple demo
 
 v2.2.4
 ==================

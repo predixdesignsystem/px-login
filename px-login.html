@@ -97,9 +97,6 @@ Custom property | Description
     properties: {
       /**
       * URL for user login
-      *
-      * @property loginUrl
-      * @default '/login'
       */
       loginUrl: {
           type: String,
@@ -107,9 +104,6 @@ Custom property | Description
       },
       /**
       * URL for fetching user info
-      *
-      * @property userInfoUrl
-      * @default '/userinfo'
       */
       userInfoUrl: {
           type: String,
@@ -117,9 +111,6 @@ Custom property | Description
       },
       /**
       * URL for user logout
-      *
-      * @property
-      * @default '/logout'
       */
       logoutUrl: {
           type: String,
@@ -127,22 +118,25 @@ Custom property | Description
       },
       /**
       * username to display
-      *
-      * @property userName
       */
       userName: {
         type: String
       },
-
       /**
       * userInfo retrieved from UAA
-      *
-      * @property userInfo
       */
       userInfo: {
         type: Object
       },
-
+      /**
+      * Key within `userInfo` object to use as `userName` - supply this in order to select
+      * a custom field from UAA for display, e.g. cases where the user_name may be an SSO ID
+      * or other less user-friendly value.
+      */
+      userNameKey: {
+        type: String,
+        value: 'user_name'
+      },
       /**
        * Set to true to prevent a REST call for user info
        *
@@ -151,18 +145,13 @@ Custom property | Description
         type: Boolean,
         value: false
       },
-
       /**
        * Where to position the popover: bottom, top, left, right
-       *
-       * @property popoverLocation
-       * @default 'bottom'
        */
       popoverLocation: {
         type: String,
         value: 'bottom'
       },
-
       /**
        * A valid IETF language tag as a string that `app-localize-behavior` will
        * use to localize this component.
@@ -201,8 +190,6 @@ Custom property | Description
        * An array of objects to specify custom menu items.
        * Each object should look like this:
        *   {url: "/foo", label: "Foo Bar"}
-       *
-       * @property menuItems
        */
       menuItems: {
         type: Array
@@ -242,8 +229,6 @@ Custom property | Description
 
     /**
     * Handles click on the "Sign in" button.
-    *
-    * @method loginClicked
     */
     loginClicked: function(event, detail, sender) {
       window.location = Polymer.dom(this).getOwnerRoot().host.loginUrl;
@@ -251,8 +236,6 @@ Custom property | Description
 
     /**
     * Handles click on the "Sign out" button.
-    *
-    * @method logoutClicked
     */
     logoutClicked: function(event, detail, sender) {
       event.preventDefault();
@@ -289,8 +272,8 @@ Custom property | Description
       });
       this.$.userInfoAjax.addEventListener('response', function(event) {
         if(event.detail.response) {
-          self.userName = event.detail.response.user_name;
           self.userInfo = event.detail.response;
+          self.userName = event.detail.response[self.userNameKey];
         }
       });
       this.$.userInfoAjax.addEventListener('error', function(event) {
