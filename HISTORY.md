@@ -1,3 +1,7 @@
+v2.2.8
+==================
+* rebuild api.json
+
 v2.2.7
 ==================
 * allow custom field for user display name (#25)
