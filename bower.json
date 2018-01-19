@@ -1,6 +1,6 @@
 {
   "name": "px-login",
-  "version": "2.2.9",
+  "version": "2.2.10",
   "main": [
     "px-login.html"
   ],

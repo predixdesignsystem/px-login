@@ -281,7 +281,7 @@ Custom property | Description
           *
           * @event px-login-response-received
           */
-          this.fire('px-login-response-received', evt.detail.response);
+          this.fire('px-login-response-received', event.detail.response);
         }
       });
       this.$.userInfoAjax.addEventListener('error', function(event) {
@@ -291,7 +291,7 @@ Custom property | Description
           *
           * @event px-login-error-received
           */
-        this.fire('px-login-error-received', evt.detail.error);
+        this.fire('px-login-error-received', event.detail.error);
         console.log(event.detail.error);
       });
       this._fetchUserInfo(this.userInfoUrl);

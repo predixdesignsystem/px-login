@@ -1,3 +1,7 @@
+v2.2.10
+==================
+* fixed typo
+
 v2.2.9
 ==================
 * added events for response/error
