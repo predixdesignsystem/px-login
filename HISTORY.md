@@ -1,3 +1,8 @@
+v2.2.9
+==================
+* added events for response/error
+* changed user-info to notify
+
 v2.2.8
 ==================
 * rebuild api.json

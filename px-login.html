@@ -126,7 +126,8 @@ Custom property | Description
       * userInfo retrieved from UAA
       */
       userInfo: {
-        type: Object
+        type: Object,
+        notify: true
       },
       /**
       * Key within `userInfo` object to use as `userName` - supply this in order to select
@@ -274,9 +275,23 @@ Custom property | Description
         if(event.detail.response) {
           self.userInfo = event.detail.response;
           self.userName = event.detail.response[self.userNameKey];
+          /**
+          * Event fired when the AJAX response is received from loginUrl.
+          * evt.detail will contain the response object.
+          *
+          * @event px-login-response-received
+          */
+          this.fire('px-login-response-received', evt.detail.response);
         }
       });
       this.$.userInfoAjax.addEventListener('error', function(event) {
+        /**
+          * Event fired when the AJAX response is received from loginUrl.
+          * evt.detail will contain the error object.
+          *
+          * @event px-login-error-received
+          */
+        this.fire('px-login-error-received', evt.detail.error);
         console.log(event.detail.error);
       });
       this._fetchUserInfo(this.userInfoUrl);
