@@ -1,3 +1,7 @@
+v2.2.11
+==================
+* reduce icon-set imports
+
 v2.2.10
 ==================
 * fixed typo
