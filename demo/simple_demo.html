@@ -21,19 +21,39 @@ limitations under the License.
 <head>
   <title>px-login Demo</title>
   <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../../px-theme/px-theme-styles.html"></link>
+  <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script type="module" src="../../px-theme/px-theme-styles.js"></script></link>
 
   <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
-  <link rel="import" href="../px-login.html" />
+  <script type="module" src="../px-login.js"></script>
 </head>
 
 <body>
-  <custom-style>
+  <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style>
     <style is="custom-style" include="px-theme-styles"></style>
-  </custom-style>
-  <px-login menu-items='[{"url":"/user-settings.html", "label": "Setting Item 1"}, {"label": "Setting Item 2", "url":"/user-settings.html"}]' logout-url="logged_out.html" user-info-url="../user-info-sample.json">
-  </px-login>
+  </custom-style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+  <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<px-login menu-items="[{&quot;url&quot;:&quot;/user-settings.html&quot;, &quot;label&quot;: &quot;Setting Item 1&quot;}, {&quot;label&quot;: &quot;Setting Item 2&quot;, &quot;url&quot;:&quot;/user-settings.html&quot;}]" logout-url="logged_out.html" user-info-url="../user-info-sample.json">
+  </px-login>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
 
 </body>
 
